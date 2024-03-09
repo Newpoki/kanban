@@ -12,7 +12,10 @@ export const BoardHeader = ({ board }: BoardHeaderProps) => {
     const ref = useRef<HTMLElement>(null)
 
     return (
-        <header className="flex items-center px-4 py-4 dark:bg-grey-800" ref={ref}>
+        <header
+            className="flex items-center border-b-[1px] border-grey-300 px-4 py-4 dark:border-grey-700 dark:bg-grey-800"
+            ref={ref}
+        >
             <Logo className="mr-4 h-5 w-6" />
 
             <BoardHeaderPopover board={board} headerRef={ref} />

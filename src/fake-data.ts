@@ -50,6 +50,48 @@ export const FAKE_DATA = [
                             },
                         ],
                     },
+                    {
+                        id: '3',
+                        name: 'Build UI for search',
+                        subtasks: [
+                            {
+                                id: '1',
+                                name: 'The first subtask',
+                                status: 'pending',
+                            },
+                            {
+                                id: '2',
+                                name: 'The second subtask',
+                                status: 'done',
+                            },
+                            {
+                                id: '3',
+                                name: 'The third subtask',
+                                status: 'pending',
+                            },
+                        ],
+                    },
+                    {
+                        id: '4',
+                        name: 'Build UI for search',
+                        subtasks: [
+                            {
+                                id: '1',
+                                name: 'The first subtask',
+                                status: 'pending',
+                            },
+                            {
+                                id: '2',
+                                name: 'The second subtask',
+                                status: 'done',
+                            },
+                            {
+                                id: '3',
+                                name: 'The third subtask',
+                                status: 'pending',
+                            },
+                        ],
+                    },
                 ],
             },
             {

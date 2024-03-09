@@ -84,6 +84,10 @@ export default {
                 '2xl': '1400px',
             },
         },
+        screens: {
+            md: '768px',
+            lg: '1440px',
+        },
         extend: {
             keyframes: {
                 'accordion-down': {

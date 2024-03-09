@@ -31,11 +31,13 @@ export const BoardHeaderPopover = ({ board, headerRef }: BoardHeaderPopoverProps
             <Popover modal open={isOpen} onOpenChange={handleToggleIsOpen}>
                 <PopoverOverlay style={{ top: popoverTopPosition }} open={isOpen} />
 
-                <PopoverTrigger className="flex items-center">
+                <PopoverTrigger className="flex items-center md:hidden">
                     <h1 className="mr-2 text-h-l dark:text-white">{board.name}</h1>
 
                     <Chevron className="h-2 w-3" />
                 </PopoverTrigger>
+
+                <h1 className="mr-2 hidden text-h-l dark:text-white md:block">{board.name}</h1>
 
                 <PopoverAnchor virtualRef={headerRef} />
 
