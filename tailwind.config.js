@@ -24,6 +24,7 @@ export default {
                 500: '#828FA3',
                 700: '#3E3F4E',
                 800: '#2B2C37',
+                900: '#20212C',
             },
             white: '#FFFFFF',
             red: {

@@ -7,7 +7,7 @@ export const Board = () => {
         <div className="flex flex-1 flex-col">
             <BoardHeader board={FAKE_DATA[0]} />
 
-            <main className="flex flex-1 gap-6 overflow-x-auto bg-grey-100 px-4 py-6">
+            <main className="dark:bg-grey-900 flex flex-1 gap-6 overflow-x-auto bg-grey-100 px-4 py-6">
                 {FAKE_DATA[0].columns.map((column) => {
                     return <BoardColumn key={column.id} column={column} />
                 })}

@@ -21,7 +21,7 @@ export const ThemeSelector = ({ className }: ThemeSelectorProps) => {
     return (
         <div
             className={cn(
-                'flex items-center justify-center gap-6 rounded-md bg-grey-100 py-[14px]',
+                'dark:bg-grey-900 flex items-center justify-center gap-6 rounded-md bg-grey-100 py-[14px]',
                 className
             )}
         >

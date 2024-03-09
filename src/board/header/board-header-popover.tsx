@@ -32,7 +32,7 @@ export const BoardHeaderPopover = ({ board, headerRef }: BoardHeaderPopoverProps
                 <PopoverOverlay style={{ top: popoverTopPosition }} open={isOpen} />
 
                 <PopoverTrigger className="flex items-center">
-                    <h1 className="mr-2 text-h-l">{board.name}</h1>
+                    <h1 className="mr-2 text-h-l dark:text-white">{board.name}</h1>
 
                     <Chevron className="h-2 w-3" />
                 </PopoverTrigger>
@@ -44,7 +44,7 @@ export const BoardHeaderPopover = ({ board, headerRef }: BoardHeaderPopoverProps
                         All boards ({FAKE_DATA.length})
                     </h2>
 
-                    <div className="mb-4 pr-6">
+                    <div className="pr-6">
                         {FAKE_DATA.map((board, index) => {
                             // TODO: check url to know if displayed board
                             const isSelected = index === 0
