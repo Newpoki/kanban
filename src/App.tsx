@@ -1,10 +1,13 @@
 import { Board } from './board/board'
+import { ThemeProvider } from './theme/theme-provider'
 
 const App = () => {
     return (
-        <div className="flex min-h-[100dvh] flex-col">
-            <Board />
-        </div>
+        <ThemeProvider>
+            <div className="flex min-h-[100dvh] flex-col">
+                <Board />
+            </div>
+        </ThemeProvider>
     )
 }
 
