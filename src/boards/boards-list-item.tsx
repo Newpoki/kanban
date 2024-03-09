@@ -2,18 +2,18 @@ import { FAKE_DATA } from '@/fake-data'
 import { Board } from '@/icons'
 import { cn } from '@/lib/utils'
 
-type BoardListItemPropsRegular = {
+type BoardsListItemPropsRegular = {
     board: (typeof FAKE_DATA)[number]
     variant?: 'selected'
 }
 
-type BoardListItemPropsNew = {
+type BoardsListItemPropsNew = {
     variant: 'new'
 }
 
-type BoardListItemProps = BoardListItemPropsRegular | BoardListItemPropsNew
+type BoardsListItemProps = BoardsListItemPropsRegular | BoardsListItemPropsNew
 
-export const BoardListItem = (props: BoardListItemProps) => {
+export const BoardsListItem = (props: BoardsListItemProps) => {
     return (
         <li
             className={cn(
