@@ -8,7 +8,7 @@ export default defineConfig({
     plugins: [svgr(), react()],
     resolve: {
         alias: {
-            '@ui-kit': path.resolve(__dirname, './src/ui-kit/index.ts'),
+            '@': path.resolve(__dirname, './src'),
         },
     },
 })

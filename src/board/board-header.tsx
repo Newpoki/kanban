@@ -1,5 +1,5 @@
 import { FAKE_DATA } from '../fake-data'
-import { Chevron, Logo } from '@ui-kit'
+import { Chevron, Logo } from '@/icons'
 
 type BoardHeaderProps = {
     board: typeof FAKE_DATA
