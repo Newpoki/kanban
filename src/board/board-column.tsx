@@ -2,7 +2,7 @@ import { FAKE_DATA } from '../fake-data'
 import { BoardColumnTask } from './board-column-task'
 
 type BoardColumnProps = {
-    column: (typeof FAKE_DATA)['columns'][number]
+    column: (typeof FAKE_DATA)[number]['columns'][number]
 }
 
 export const BoardColumn = ({ column }: BoardColumnProps) => {

@@ -17,7 +17,7 @@ export default {
                 300: '#A8A4FF',
                 500: '#635FC7',
             },
-            black: '#00112',
+            black: '#000112',
             grey: {
                 100: '#F4F7FD',
                 300: '#E4EBFA',

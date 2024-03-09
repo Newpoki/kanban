@@ -2,7 +2,7 @@ import { useMemo } from 'react'
 import { FAKE_DATA } from '../fake-data'
 
 type BoardColumnTaskProps = {
-    task: (typeof FAKE_DATA)['columns'][number]['tasks'][number]
+    task: (typeof FAKE_DATA)[number]['columns'][number]['tasks'][number]
 }
 
 export const BoardColumnTask = ({ task }: BoardColumnTaskProps) => {

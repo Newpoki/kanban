@@ -1,19 +1,21 @@
 import { Button } from '@/components/ui/button'
-import { FAKE_DATA } from '../fake-data'
-import { Chevron, Logo, Plus, VerticalDots } from '@/icons'
+import { FAKE_DATA } from '../../fake-data'
+import { Logo, Plus, VerticalDots } from '@/icons'
+import { BoardHeaderPopover } from './board-header-popover'
+import { useRef } from 'react'
 
 type BoardHeaderProps = {
-    board: typeof FAKE_DATA
+    board: (typeof FAKE_DATA)[number]
 }
 
 export const BoardHeader = ({ board }: BoardHeaderProps) => {
+    const ref = useRef<HTMLElement>(null)
+
     return (
-        <header className="flex items-center px-4 py-4">
+        <header className="flex items-center px-4 py-4" ref={ref}>
             <Logo className="mr-4 h-5 w-6" />
 
-            <h1 className="mr-2 text-h-l">{board.name}</h1>
-
-            <Chevron className="h-2 w-3" />
+            <BoardHeaderPopover board={board} headerRef={ref} />
 
             <div className="ml-auto flex items-center gap-4">
                 <Button size="icon">
