@@ -2,6 +2,9 @@
 export default {
     content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
     theme: {
+        fontFamily: {
+            sans: ['Plus Jakarta Sans'],
+        },
         colors: {
             transparent: 'transparent',
             purple: {
@@ -12,7 +15,7 @@ export default {
             grey: {
                 100: '#F4F7FD',
                 300: '#E4EBFA',
-                500: '#20212C',
+                500: '#828FA3',
                 700: '#3E3F4E',
                 800: '#2B2C37',
             },
@@ -26,28 +29,28 @@ export default {
             'h-xl': [
                 '24px',
                 {
-                    fontWeight: 'bold',
+                    fontWeight: 700,
                     lineHeight: '30px',
                 },
             ],
             'h-l': [
                 '18px',
                 {
-                    fontWeight: 'bold',
+                    fontWeight: 700,
                     lineHeight: '23px',
                 },
             ],
             'h-m': [
                 '15px',
                 {
-                    fontWeight: 'bold',
+                    fontWeight: 700,
                     lineHeight: '19px',
                 },
             ],
             'h-s': [
                 '12px',
                 {
-                    fontWeight: 'bold',
+                    fontWeight: 700,
                     lineHeight: '15px',
                     letterSpacing: '2.4px',
                 },
@@ -62,7 +65,7 @@ export default {
             m: [
                 '12px',
                 {
-                    fontWeight: 'bold',
+                    fontWeight: 700,
                     lineHeight: '15px',
                 },
             ],

@@ -13,14 +13,17 @@ export const FAKE_DATA = {
                         {
                             id: '1',
                             name: 'The first subtask',
+                            status: 'pending',
                         },
                         {
                             id: '2',
                             name: 'The second subtask',
+                            status: 'done',
                         },
                         {
                             id: '3',
                             name: 'The third subtask',
+                            status: 'pending',
                         },
                     ],
                 },
@@ -31,14 +34,17 @@ export const FAKE_DATA = {
                         {
                             id: '1',
                             name: 'The first subtask',
+                            status: 'pending',
                         },
                         {
                             id: '2',
                             name: 'The second subtask',
+                            status: 'done',
                         },
                         {
                             id: '3',
                             name: 'The third subtask',
+                            status: 'pending',
                         },
                     ],
                 },
@@ -56,14 +62,17 @@ export const FAKE_DATA = {
                         {
                             id: '1',
                             name: 'The first subtask',
+                            status: 'pending',
                         },
                         {
                             id: '2',
                             name: 'The second subtask',
+                            status: 'done',
                         },
                         {
                             id: '3',
                             name: 'The third subtask',
+                            status: 'pending',
                         },
                     ],
                 },
@@ -74,18 +83,21 @@ export const FAKE_DATA = {
                         {
                             id: '1',
                             name: 'The first subtask',
+                            status: 'pending',
                         },
                         {
                             id: '2',
                             name: 'The second subtask',
+                            status: 'done',
                         },
                         {
                             id: '3',
                             name: 'The third subtask',
+                            status: 'pending',
                         },
                     ],
                 },
             ],
         },
     ],
-}
+} as const
