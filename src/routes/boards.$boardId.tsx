@@ -1,4 +1,5 @@
 import { Board } from '@/board/board'
+import { BoardNotFound } from '@/board/board-not-found'
 import { BoardsDrawer } from '@/boards/boards-drawer'
 import { useBoardsStore } from '@/boards/boards-store'
 import { createFileRoute } from '@tanstack/react-router'
@@ -12,15 +13,10 @@ function BoardsComponent() {
 
     const board = useBoardsStore((boardStore) => boardStore.data[boardId])
 
-    if (board == null) {
-        // TODO: Add proper 404
-        return <div>not found</div>
-    }
-
     return (
         <div className="flex min-h-[100dvh]">
             <BoardsDrawer />
-            <Board board={board} />
+            {board != null ? <Board board={board} /> : <BoardNotFound />}
         </div>
     )
 }
