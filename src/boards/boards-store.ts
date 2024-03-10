@@ -15,6 +15,8 @@ const DEFAULT_BOARD: Board = {
                 {
                     id: uuidv4(),
                     name: 'Build UI for onboarding flow',
+                    description:
+                        "We know what we're planning to build for version one. Now we need to finalise the first pricing model we'll use. Keep iterating the subtasks until we have a coherent proposition.",
                     subtasks: [
                         {
                             id: uuidv4(),
@@ -36,6 +38,8 @@ const DEFAULT_BOARD: Board = {
                 {
                     id: uuidv4(),
                     name: 'Build UI for search',
+                    description:
+                        "We know what we're planning to build for version one. Now we need to finalise the first pricing model we'll use. Keep iterating the subtasks until we have a coherent proposition.",
                     subtasks: [
                         {
                             id: uuidv4(),
@@ -57,6 +61,8 @@ const DEFAULT_BOARD: Board = {
                 {
                     id: uuidv4(),
                     name: 'Build UI for onboarding flow',
+                    description:
+                        "We know what we're planning to build for version one. Now we need to finalise the first pricing model we'll use. Keep iterating the subtasks until we have a coherent proposition.",
                     subtasks: [
                         {
                             id: uuidv4(),
@@ -78,6 +84,8 @@ const DEFAULT_BOARD: Board = {
                 {
                     id: uuidv4(),
                     name: 'Build UI for search',
+                    description:
+                        "We know what we're planning to build for version one. Now we need to finalise the first pricing model we'll use. Keep iterating the subtasks until we have a coherent proposition.",
                     subtasks: [
                         {
                             id: uuidv4(),
@@ -99,6 +107,8 @@ const DEFAULT_BOARD: Board = {
                 {
                     id: uuidv4(),
                     name: 'Build UI for onboarding flow',
+                    description:
+                        "We know what we're planning to build for version one. Now we need to finalise the first pricing model we'll use. Keep iterating the subtasks until we have a coherent proposition.",
                     subtasks: [
                         {
                             id: uuidv4(),
@@ -120,6 +130,8 @@ const DEFAULT_BOARD: Board = {
                 {
                     id: uuidv4(),
                     name: 'Build UI for search',
+                    description:
+                        "We know what we're planning to build for version one. Now we need to finalise the first pricing model we'll use. Keep iterating the subtasks until we have a coherent proposition.",
                     subtasks: [
                         {
                             id: uuidv4(),
@@ -148,6 +160,8 @@ const DEFAULT_BOARD: Board = {
                 {
                     id: uuidv4(),
                     name: 'DOING UI for onboarding flow',
+                    description:
+                        "We know what we're planning to build for version one. Now we need to finalise the first pricing model we'll use. Keep iterating the subtasks until we have a coherent proposition.",
                     subtasks: [
                         {
                             id: uuidv4(),
@@ -169,6 +183,8 @@ const DEFAULT_BOARD: Board = {
                 {
                     id: uuidv4(),
                     name: 'DOING UI for search',
+                    description:
+                        "We know what we're planning to build for version one. Now we need to finalise the first pricing model we'll use. Keep iterating the subtasks until we have a coherent proposition.",
                     subtasks: [
                         {
                             id: uuidv4(),

@@ -1,11 +1,12 @@
-import { BoardColumn as IBoardColumn } from '@/boards/boards-schemas'
+import { Board, BoardColumn as IBoardColumn } from '@/boards/boards-schemas'
 import { BoardColumnTask } from './board-column-task'
 
 type BoardColumnProps = {
+    boardId: Board['id']
     column: IBoardColumn
 }
 
-export const BoardColumn = ({ column }: BoardColumnProps) => {
+export const BoardColumn = ({ boardId, column }: BoardColumnProps) => {
     return (
         <section>
             <h2 className="mb-6 flex items-center gap-3">
@@ -17,7 +18,7 @@ export const BoardColumn = ({ column }: BoardColumnProps) => {
 
             <ul className="flex w-full flex-col gap-5">
                 {column.tasks.map((task) => {
-                    return <BoardColumnTask key={task.id} task={task} />
+                    return <BoardColumnTask boardId={boardId} key={task.id} task={task} />
                 })}
             </ul>
         </section>

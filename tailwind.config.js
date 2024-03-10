@@ -88,6 +88,9 @@ export default {
             md: '768px',
             lg: '1440px',
         },
+        fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+        },
         extend: {
             keyframes: {
                 'accordion-down': {

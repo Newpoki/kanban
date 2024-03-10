@@ -17,9 +17,8 @@ export const BoardsList = () => {
                     const isSelected = index === 0
 
                     return (
-                        <Link to="/boards/$boardId" params={{ boardId: board.id }}>
+                        <Link to="/boards/$boardId" key={board.id} params={{ boardId: board.id }}>
                             <BoardsListItem
-                                key={board.id}
                                 board={board}
                                 variant={isSelected ? 'selected' : undefined}
                             />

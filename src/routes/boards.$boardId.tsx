@@ -5,10 +5,10 @@ import { useBoardsStore } from '@/boards/boards-store'
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/boards/$boardId')({
-    component: BoardsComponent,
+    component: BoardComponent,
 })
 
-function BoardsComponent() {
+function BoardComponent() {
     const { boardId } = Route.useParams()
 
     const board = useBoardsStore((boardStore) => boardStore.data[boardId])

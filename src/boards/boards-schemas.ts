@@ -9,6 +9,7 @@ const boardColumnTaskSubtaskSchema = z.object({
 const boardColumnTaskSchema = z.object({
     id: z.string(),
     name: z.string(),
+    description: z.string(),
     subtasks: z.array(boardColumnTaskSubtaskSchema),
 })
 

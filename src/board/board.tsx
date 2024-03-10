@@ -2,6 +2,7 @@ import { BoardColumn } from './board-column'
 import { BoardColumnPlaceholder } from './board-column-placeholder'
 import { BoardHeader } from './header/board-header'
 import { Board as IBoard } from '@/boards/boards-schemas'
+import { Outlet } from '@tanstack/react-router'
 
 type BoardProps = {
     board: IBoard
@@ -18,11 +19,13 @@ export const Board = ({ board }: BoardProps) => {
                 style={{ gridTemplateColumns: `repeat(${board.columns.length + 1}, 280px)` }}
             >
                 {board.columns.map((column) => {
-                    return <BoardColumn key={column.id} column={column} />
+                    return <BoardColumn key={column.id} boardId={board.id} column={column} />
                 })}
 
                 <BoardColumnPlaceholder />
             </main>
+
+            <Outlet />
         </div>
     )
 }
