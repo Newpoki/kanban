@@ -48,7 +48,7 @@ function BoardTaskComponent() {
                 <p className="text-l text-grey-500">{task.description}</p>
 
                 <section>
-                    <h3 className="mb-4 text-m text-grey-500">
+                    <h3 className="mb-4 text-m text-grey-500 dark:text-white">
                         Subtasks ({doneCount} of {task.subtasks.length})
                     </h3>
                 </section>
