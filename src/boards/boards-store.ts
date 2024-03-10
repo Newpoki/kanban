@@ -1,37 +1,7 @@
-import { Color } from '@/lib/color'
+import { create } from 'zustand'
 import { v4 as uuidv4 } from 'uuid'
-
-type BoardColumnTaskSubtaskStatus = 'pending' | 'done'
-
-type BoardColumnTaskSubtask = {
-    id: string
-    name: string
-    status: BoardColumnTaskSubtaskStatus
-}
-
-type BoardColumnTask = {
-    id: string
-    name: string
-    subtasks: BoardColumnTaskSubtask[]
-}
-
-type BoardColumn = {
-    color: Color
-    id: string
-    name: string
-    tasks: BoardColumnTask[]
-}
-
-export type Board = {
-    id: string
-    name: string
-    columns: BoardColumn[]
-}
-
-export type BoardListItem = {
-    id: Board['id']
-    name: Board['name']
-}
+import { Board, BoardsMap, boardsMapSchema } from './boards-schemas'
+import { persist } from 'zustand/middleware'
 
 const DEFAULT_BOARD: Board = {
     id: uuidv4(),
@@ -137,3 +107,34 @@ const DEFAULT_BOARD: Board = {
         },
     ],
 }
+
+const getInitialBoardsMap = (): BoardsMap => {
+    const boardsFromLS = localStorage.getItem('boards')
+
+    const parsedBoardsMapFromLS = boardsMapSchema.safeParse(boardsFromLS)
+
+    if (parsedBoardsMapFromLS.success) {
+        return parsedBoardsMapFromLS.data
+    }
+
+    return {
+        [DEFAULT_BOARD.id]: DEFAULT_BOARD,
+    }
+}
+
+type BoardsStore = {
+    data: BoardsMap
+}
+
+export const useBoardsStore = create(
+    persist<BoardsStore>(
+        () => {
+            return {
+                data: getInitialBoardsMap(),
+            }
+        },
+        {
+            name: 'boards-map',
+        }
+    )
+)
