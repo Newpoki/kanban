@@ -54,6 +54,90 @@ const DEFAULT_BOARD: Board = {
                         },
                     ],
                 },
+                {
+                    id: uuidv4(),
+                    name: 'Build UI for onboarding flow',
+                    subtasks: [
+                        {
+                            id: uuidv4(),
+                            name: 'The first subtask',
+                            status: 'pending',
+                        },
+                        {
+                            id: uuidv4(),
+                            name: 'The second subtask',
+                            status: 'done',
+                        },
+                        {
+                            id: uuidv4(),
+                            name: 'The third subtask',
+                            status: 'pending',
+                        },
+                    ],
+                },
+                {
+                    id: uuidv4(),
+                    name: 'Build UI for search',
+                    subtasks: [
+                        {
+                            id: uuidv4(),
+                            name: 'The first subtask',
+                            status: 'pending',
+                        },
+                        {
+                            id: uuidv4(),
+                            name: 'The second subtask',
+                            status: 'done',
+                        },
+                        {
+                            id: uuidv4(),
+                            name: 'The third subtask',
+                            status: 'pending',
+                        },
+                    ],
+                },
+                {
+                    id: uuidv4(),
+                    name: 'Build UI for onboarding flow',
+                    subtasks: [
+                        {
+                            id: uuidv4(),
+                            name: 'The first subtask',
+                            status: 'pending',
+                        },
+                        {
+                            id: uuidv4(),
+                            name: 'The second subtask',
+                            status: 'done',
+                        },
+                        {
+                            id: uuidv4(),
+                            name: 'The third subtask',
+                            status: 'pending',
+                        },
+                    ],
+                },
+                {
+                    id: uuidv4(),
+                    name: 'Build UI for search',
+                    subtasks: [
+                        {
+                            id: uuidv4(),
+                            name: 'The first subtask',
+                            status: 'pending',
+                        },
+                        {
+                            id: uuidv4(),
+                            name: 'The second subtask',
+                            status: 'done',
+                        },
+                        {
+                            id: uuidv4(),
+                            name: 'The third subtask',
+                            status: 'pending',
+                        },
+                    ],
+                },
             ],
         },
         {

@@ -106,6 +106,12 @@ export default {
             transitionProperty: {
                 width: 'width',
             },
+            backgroundImage: {
+                'column-placeholder-bg':
+                    'linear-gradient(to bottom, #e9effa, rgba(233, 239, 250, 0.5))',
+                'dark-column-placeholder-bg':
+                    'linear-gradient(to bottom, #2b2c37, rgba(43, 44, 55, 0.5))',
+            },
         },
     },
     plugins: [tailwindCssAnimate],
