@@ -1,5 +1,6 @@
 import { BoardsListItem } from './boards-list-item'
 import { useBoardsStore } from './boards-store'
+import { Link } from '@tanstack/react-router'
 
 export const BoardsList = () => {
     const boards = useBoardsStore((store) => Object.values(store.data))
@@ -10,20 +11,22 @@ export const BoardsList = () => {
                 All boards ({boards.length})
             </h2>
 
-            <div className="pr-6">
+            <ul className="pr-6">
                 {boards.map((board, index) => {
                     // TODO: check url to know if displayed board
                     const isSelected = index === 0
 
                     return (
-                        <BoardsListItem
-                            key={board.id}
-                            board={board}
-                            variant={isSelected ? 'selected' : undefined}
-                        />
+                        <Link to="/boards/$boardId" params={{ boardId: board.id }}>
+                            <BoardsListItem
+                                key={board.id}
+                                board={board}
+                                variant={isSelected ? 'selected' : undefined}
+                            />
+                        </Link>
                     )
                 })}
-            </div>
+            </ul>
 
             <BoardsListItem variant="new" />
         </>

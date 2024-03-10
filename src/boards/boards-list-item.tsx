@@ -1,9 +1,9 @@
 import { Board as BoardIcon } from '@/icons'
 import { cn } from '@/lib/utils'
-import { BoardListItem } from './boards-atoms'
+import { Board } from './boards-schemas'
 
 type BoardsListItemPropsRegular = {
-    board: BoardListItem
+    board: Board
     variant?: 'selected'
 }
 
