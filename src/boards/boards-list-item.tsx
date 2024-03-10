@@ -1,9 +1,9 @@
-import { FAKE_DATA } from '@/fake-data'
-import { Board } from '@/icons'
+import { Board as BoardIcon } from '@/icons'
 import { cn } from '@/lib/utils'
+import { BoardListItem } from './boards-atoms'
 
 type BoardsListItemPropsRegular = {
-    board: (typeof FAKE_DATA)[number]
+    board: BoardListItem
     variant?: 'selected'
 }
 
@@ -25,7 +25,7 @@ export const BoardsListItem = (props: BoardsListItemProps) => {
                 }
             )}
         >
-            <Board className="h-4 w-4 flex-shrink-0" />
+            <BoardIcon className="h-4 w-4 flex-shrink-0" />
 
             <h3 className="truncate text-h-m">
                 {props.variant === 'new' ? '+ Create New Board' : props.board.name}
