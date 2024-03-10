@@ -1,5 +1,4 @@
 import { Chevron } from '@/icons'
-import { FAKE_DATA } from '@/fake-data'
 
 import {
     Popover,
@@ -11,9 +10,10 @@ import {
 import { useCallback, useState } from 'react'
 import { ThemeSelector } from '@/theme/theme-selector'
 import { BoardsList } from '@/boards/boards-list'
+import { Board } from '@/boards/boards-schemas'
 
 type BoardHeaderPopoverProps = {
-    board: (typeof FAKE_DATA)[number]
+    board: Board
     headerRef: React.RefObject<HTMLElement>
 }
 

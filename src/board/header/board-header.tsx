@@ -1,11 +1,11 @@
 import { Button } from '@/components/ui/button'
-import { FAKE_DATA } from '../../fake-data'
 import { Logo, Plus, VerticalDots } from '@/icons'
 import { BoardHeaderPopover } from './board-header-popover'
 import { useRef } from 'react'
+import { Board } from '@/boards/boards-schemas'
 
 type BoardHeaderProps = {
-    board: (typeof FAKE_DATA)[number]
+    board: Board
 }
 
 export const BoardHeader = ({ board }: BoardHeaderProps) => {

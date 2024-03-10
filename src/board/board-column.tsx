@@ -1,8 +1,8 @@
-import { FAKE_DATA } from '../fake-data'
+import { BoardColumn as IBoardColumn } from '@/boards/boards-schemas'
 import { BoardColumnTask } from './board-column-task'
 
 type BoardColumnProps = {
-    column: (typeof FAKE_DATA)[number]['columns'][number]
+    column: IBoardColumn
 }
 
 export const BoardColumn = ({ column }: BoardColumnProps) => {
