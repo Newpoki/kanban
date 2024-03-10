@@ -7,7 +7,7 @@ type BoardColumnProps = {
 
 export const BoardColumn = ({ column }: BoardColumnProps) => {
     return (
-        <section>
+        <section className="mb-6 h-fit">
             <h2 className="mb-6 flex items-center gap-3">
                 <span className="h-4 w-4 rounded-full" style={{ backgroundColor: column.color }} />
                 <span className="text-h-s uppercase text-grey-500">
