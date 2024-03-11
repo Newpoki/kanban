@@ -1,3 +1,4 @@
+import { BoardColumn } from '@/boards/boards-schemas'
 import { useBoardsStore } from '@/boards/boards-store'
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import {
@@ -26,6 +27,8 @@ function BoardTaskComponent() {
         return boardsStore.data[boardId]?.columns.find((column) => column.id === columnId)
     })
 
+    const changeTaskColumn = useBoardsStore((store) => store.changeTaskColumn)
+
     const task = useBoardsStore((boardsStore) => {
         return boardsStore.data[boardId]?.columns
             .flatMap((column) => column.tasks)
@@ -50,6 +53,24 @@ function BoardTaskComponent() {
             navigate({ to: '/boards/$boardId', params: { boardId } })
         }, 300)
     }, [boardId, navigate])
+
+    const handleChangeTaskColumn = useCallback(
+        (nextColumnId: BoardColumn['id']) => {
+            // This should never happen as we would not be able to diplay the task
+            if (taskColumn == null) {
+                return
+            }
+
+            changeTaskColumn({ boardId, currentColumnId: taskColumn?.id, nextColumnId, taskId })
+
+            // Also updating the url so if user refresh, the subtask is still displayed
+            navigate({
+                to: '/boards/$boardId/column/$columnId/task/$taskId',
+                params: { boardId, columnId: nextColumnId, taskId },
+            })
+        },
+        [boardId, changeTaskColumn, navigate, taskColumn, taskId]
+    )
 
     if (task == null) {
         // TODO: handle proper task not found screen
@@ -94,10 +115,11 @@ function BoardTaskComponent() {
                             Current status
                         </h3>
 
-                        <Select defaultValue={taskColumn.id}>
+                        <Select defaultValue={taskColumn.id} onValueChange={handleChangeTaskColumn}>
                             <SelectTrigger className="w-full">
                                 <SelectValue />
                             </SelectTrigger>
+
                             <SelectContent>
                                 {statusesOptions.map((option) => (
                                     <SelectItem key={option.id} value={option.id}>

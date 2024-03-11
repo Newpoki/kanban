@@ -236,15 +236,58 @@ type ChangeSubtaskStatusPayload = {
     id: BoardColumnTaskSubtask['id']
 }
 
+type ChangeTaskColumnPayload = {
+    boardId: Board['id']
+    currentColumnId: BoardColumn['id']
+    nextColumnId: BoardColumn['id']
+    taskId: BoardColumnTask['id']
+}
+
 type BoardsStore = {
     data: BoardsMap
     changeSubtaskStatus: (payload: ChangeSubtaskStatusPayload) => void
+    changeTaskColumn: (payload: ChangeTaskColumnPayload) => void
 }
 
 export const useBoardsStore = create(
     persist<BoardsStore>(
         (set, get) => ({
             data: getInitialBoardsMap(),
+            changeTaskColumn: ({ boardId, currentColumnId, nextColumnId, taskId }) => {
+                const board = get().data[boardId]
+
+                if (board == null) {
+                    return
+                }
+
+                const task = board.columns
+                    .flatMap((column) => column.tasks)
+                    .find((task) => task.id === taskId)
+
+                if (task == null) {
+                    return
+                }
+
+                const updatedBoard: Board = {
+                    ...board,
+                    columns: board.columns.map((column) => {
+                        if (column.id === currentColumnId) {
+                            return {
+                                ...column,
+                                tasks: column.tasks.filter((task) => task.id !== taskId),
+                            }
+                        }
+
+                        if (column.id === nextColumnId) {
+                            return { ...column, tasks: [...column.tasks, task] }
+                        }
+
+                        return column
+                    }),
+                }
+
+                set((state) => ({ data: { ...state.data, [boardId]: updatedBoard } }))
+            },
             changeSubtaskStatus: ({ boardId, columnId, taskId, id }) => {
                 const board = get().data[boardId]
 
