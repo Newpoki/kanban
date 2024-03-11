@@ -1,5 +1,12 @@
 import { useBoardsStore } from '@/boards/boards-store'
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from '@/components/ui/select'
 import { VerticalDots } from '@/icons'
 import { Subtask } from '@/subtask/subtask'
 import { createFileRoute, useNavigate } from '@tanstack/react-router'
@@ -15,10 +22,23 @@ function BoardTaskComponent() {
     const { boardId, columnId, taskId } = Route.useParams()
     const navigate = useNavigate()
 
-    const task = useBoardsStore((boardStore) => {
-        return boardStore.data[boardId]?.columns
+    const taskColumn = useBoardsStore((boardsStore) => {
+        return boardsStore.data[boardId]?.columns.find((column) => column.id === columnId)
+    })
+
+    const task = useBoardsStore((boardsStore) => {
+        return boardsStore.data[boardId]?.columns
             .flatMap((column) => column.tasks)
             .find((task) => task.id === taskId)
+    })
+
+    const statusesOptions = useBoardsStore((boardsStore) => {
+        return (
+            boardsStore.data[boardId]?.columns.map((column) => ({
+                name: column.name,
+                id: column.id,
+            })) ?? []
+        )
     })
 
     const handleToggleDialog = useCallback(() => {
@@ -40,7 +60,7 @@ function BoardTaskComponent() {
 
     return (
         <Dialog open={isOpen} onOpenChange={handleToggleDialog}>
-            <DialogContent>
+            <DialogContent className="pb-8">
                 <DialogHeader className="justify-between gap-4">
                     <DialogTitle>{task.name}</DialogTitle>
                     <VerticalDots className="h-5 w-2" />
@@ -67,6 +87,27 @@ function BoardTaskComponent() {
                         })}
                     </ul>
                 </section>
+
+                {taskColumn != null && statusesOptions.length > 0 && (
+                    <section>
+                        <h3 className="mb-2 text-m text-grey-500 dark:text-white">
+                            Current status
+                        </h3>
+
+                        <Select defaultValue={taskColumn.id}>
+                            <SelectTrigger className="w-full">
+                                <SelectValue />
+                            </SelectTrigger>
+                            <SelectContent>
+                                {statusesOptions.map((option) => (
+                                    <SelectItem key={option.id} value={option.id}>
+                                        {option.name}
+                                    </SelectItem>
+                                ))}
+                            </SelectContent>
+                        </Select>
+                    </section>
+                )}
             </DialogContent>
         </Dialog>
     )

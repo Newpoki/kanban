@@ -65,7 +65,7 @@ export default {
             l: [
                 '13px',
                 {
-                    fontWeight: 'medium',
+                    fontWeight: 500,
                     lineHeight: '23px',
                 },
             ],
