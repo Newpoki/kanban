@@ -18,7 +18,14 @@ export const BoardColumn = ({ boardId, column }: BoardColumnProps) => {
 
             <ul className="flex w-full flex-col gap-5">
                 {column.tasks.map((task) => {
-                    return <BoardColumnTask boardId={boardId} key={task.id} task={task} />
+                    return (
+                        <BoardColumnTask
+                            boardId={boardId}
+                            columnId={column.id}
+                            key={task.id}
+                            task={task}
+                        />
+                    )
                 })}
             </ul>
         </section>

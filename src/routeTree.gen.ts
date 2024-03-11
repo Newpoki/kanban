@@ -13,7 +13,7 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
 import { Route as BoardsBoardIdImport } from './routes/boards.$boardId'
-import { Route as BoardsBoardIdTaskTaskIdImport } from './routes/boards.$boardId.task.$taskId'
+import { Route as BoardsBoardIdColumnColumnIdTaskTaskIdImport } from './routes/boards.$boardId.column.$columnId.task.$taskId'
 
 // Create/Update Routes
 
@@ -27,10 +27,11 @@ const BoardsBoardIdRoute = BoardsBoardIdImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const BoardsBoardIdTaskTaskIdRoute = BoardsBoardIdTaskTaskIdImport.update({
-  path: '/task/$taskId',
-  getParentRoute: () => BoardsBoardIdRoute,
-} as any)
+const BoardsBoardIdColumnColumnIdTaskTaskIdRoute =
+  BoardsBoardIdColumnColumnIdTaskTaskIdImport.update({
+    path: '/column/$columnId/task/$taskId',
+    getParentRoute: () => BoardsBoardIdRoute,
+  } as any)
 
 // Populate the FileRoutesByPath interface
 
@@ -44,8 +45,8 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BoardsBoardIdImport
       parentRoute: typeof rootRoute
     }
-    '/boards/$boardId/task/$taskId': {
-      preLoaderRoute: typeof BoardsBoardIdTaskTaskIdImport
+    '/boards/$boardId/column/$columnId/task/$taskId': {
+      preLoaderRoute: typeof BoardsBoardIdColumnColumnIdTaskTaskIdImport
       parentRoute: typeof BoardsBoardIdImport
     }
   }
@@ -55,7 +56,7 @@ declare module '@tanstack/react-router' {
 
 export const routeTree = rootRoute.addChildren([
   IndexRoute,
-  BoardsBoardIdRoute.addChildren([BoardsBoardIdTaskTaskIdRoute]),
+  BoardsBoardIdRoute.addChildren([BoardsBoardIdColumnColumnIdTaskTaskIdRoute]),
 ])
 
 /* prettier-ignore-end */

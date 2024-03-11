@@ -1,17 +1,18 @@
 import { useBoardsStore } from '@/boards/boards-store'
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { VerticalDots } from '@/icons'
+import { Subtask } from '@/subtask/subtask'
 import { createFileRoute, useNavigate } from '@tanstack/react-router'
 import { useCallback, useState } from 'react'
 
-export const Route = createFileRoute('/boards/$boardId/task/$taskId')({
+export const Route = createFileRoute('/boards/$boardId/column/$columnId/task/$taskId')({
     component: BoardTaskComponent,
 })
 
 function BoardTaskComponent() {
     const [isOpen, setIsOpen] = useState(true)
 
-    const { boardId, taskId } = Route.useParams()
+    const { boardId, columnId, taskId } = Route.useParams()
     const navigate = useNavigate()
 
     const task = useBoardsStore((boardStore) => {
@@ -51,6 +52,20 @@ function BoardTaskComponent() {
                     <h3 className="mb-4 text-m text-grey-500 dark:text-white">
                         Subtasks ({doneCount} of {task.subtasks.length})
                     </h3>
+
+                    <ul className="flex flex-col gap-2">
+                        {task.subtasks.map((subtask) => {
+                            return (
+                                <Subtask
+                                    key={subtask.id}
+                                    boardId={boardId}
+                                    columnId={columnId}
+                                    taskId={taskId}
+                                    subtask={subtask}
+                                />
+                            )
+                        })}
+                    </ul>
                 </section>
             </DialogContent>
         </Dialog>

@@ -1,6 +1,13 @@
 import { create } from 'zustand'
 import { v4 as uuidv4 } from 'uuid'
-import { Board, BoardsMap, boardsMapSchema } from './boards-schemas'
+import {
+    Board,
+    BoardColumn,
+    BoardColumnTask,
+    BoardColumnTaskSubtask,
+    BoardsMap,
+    boardsMapSchema,
+} from './boards-schemas'
 import { persist } from 'zustand/middleware'
 
 const DEFAULT_BOARD: Board = {
@@ -222,19 +229,64 @@ const getInitialBoardsMap = (): BoardsMap => {
     }
 }
 
+type ChangeSubtaskStatusPayload = {
+    boardId: Board['id']
+    columnId: BoardColumn['id']
+    taskId: BoardColumnTask['id']
+    id: BoardColumnTaskSubtask['id']
+}
+
 type BoardsStore = {
     data: BoardsMap
+    changeSubtaskStatus: (payload: ChangeSubtaskStatusPayload) => void
 }
 
 export const useBoardsStore = create(
     persist<BoardsStore>(
-        () => {
-            return {
-                data: getInitialBoardsMap(),
-            }
-        },
-        {
-            name: 'boards-map',
-        }
+        (set, get) => ({
+            data: getInitialBoardsMap(),
+            changeSubtaskStatus: ({ boardId, columnId, taskId, id }) => {
+                const board = get().data[boardId]
+
+                if (board == null) {
+                    return
+                }
+
+                const updatedBoard: Board = {
+                    ...board,
+                    columns: board.columns.map((column) => {
+                        if (column.id !== columnId) {
+                            return column
+                        }
+
+                        return {
+                            ...column,
+                            tasks: column.tasks.map((task) => {
+                                if (task.id !== taskId) {
+                                    return task
+                                }
+
+                                return {
+                                    ...task,
+                                    subtasks: task.subtasks.map((subtask) => {
+                                        if (subtask.id !== id) {
+                                            return subtask
+                                        }
+
+                                        return {
+                                            ...subtask,
+                                            status: subtask.status === 'done' ? 'pending' : 'done',
+                                        }
+                                    }),
+                                }
+                            }),
+                        }
+                    }),
+                }
+
+                set((state) => ({ data: { ...state.data, [boardId]: updatedBoard } }))
+            },
+        }),
+        { name: 'boards-map' }
     )
 )

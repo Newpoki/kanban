@@ -29,6 +29,7 @@ const boardSchema = z.object({
 export const boardsMapSchema = z.record(boardSchema.shape.id, boardSchema)
 
 export type BoardColumnTask = z.infer<typeof boardColumnTaskSchema>
+export type BoardColumnTaskSubtask = z.infer<typeof boardColumnTaskSubtaskSchema>
 export type BoardColumn = z.infer<typeof boardColumnSchema>
 export type Board = z.infer<typeof boardSchema>
 export type BoardsMap = z.infer<typeof boardsMapSchema>
