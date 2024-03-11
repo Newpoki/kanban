@@ -15,7 +15,7 @@ function BoardTaskComponent() {
     const navigate = useNavigate()
 
     const task = useBoardsStore((boardStore) => {
-        return boardStore.data[boardId].columns
+        return boardStore.data[boardId]?.columns
             .flatMap((column) => column.tasks)
             .find((task) => task.id === taskId)
     })
