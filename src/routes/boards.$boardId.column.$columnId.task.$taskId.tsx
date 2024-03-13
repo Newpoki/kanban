@@ -8,8 +8,8 @@ import {
     SelectTrigger,
     SelectValue,
 } from '@/components/ui/select'
-import { VerticalDots } from '@/icons'
 import { Subtask } from '@/subtask/subtask'
+import { TaskDropdown } from '@/task/task-dropdown'
 import { createFileRoute, useNavigate } from '@tanstack/react-router'
 import { useCallback, useState } from 'react'
 
@@ -84,7 +84,8 @@ function BoardTaskComponent() {
             <DialogContent className="pb-8">
                 <DialogHeader className="justify-between gap-4">
                     <DialogTitle>{task.name}</DialogTitle>
-                    <VerticalDots className="h-5 w-2" />
+
+                    <TaskDropdown />
                 </DialogHeader>
 
                 <p className="text-l text-grey-500">{task.description}</p>
