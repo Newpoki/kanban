@@ -1,4 +1,5 @@
 import { BoardColumn } from '@/boards/boards-schemas'
+import { selectBoardsTask } from '@/boards/boards-selectors'
 import { useBoardsStore } from '@/boards/boards-store'
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import {
@@ -13,7 +14,7 @@ import { TaskDropdown } from '@/task/task-dropdown'
 import { createFileRoute, useNavigate } from '@tanstack/react-router'
 import { useCallback, useState } from 'react'
 
-export const Route = createFileRoute('/boards/$boardId/column/$columnId/task/$taskId')({
+export const Route = createFileRoute('/boards/$boardId/column/$columnId/task/$taskId/')({
     component: BoardTaskComponent,
 })
 
@@ -29,11 +30,7 @@ function BoardTaskComponent() {
 
     const changeTaskColumn = useBoardsStore((store) => store.changeTaskColumn)
 
-    const task = useBoardsStore((boardsStore) => {
-        return boardsStore.data[boardId]?.columns
-            .flatMap((column) => column.tasks)
-            .find((task) => task.id === taskId)
-    })
+    const task = useBoardsStore(selectBoardsTask({ boardId, taskId }))
 
     const statusesOptions = useBoardsStore((boardsStore) => {
         return (
@@ -85,7 +82,7 @@ function BoardTaskComponent() {
                 <DialogHeader className="justify-between gap-4">
                     <DialogTitle>{task.name}</DialogTitle>
 
-                    <TaskDropdown />
+                    <TaskDropdown boardId={boardId} columnId={columnId} taskId={taskId} />
                 </DialogHeader>
 
                 <p className="text-l text-grey-500">{task.description}</p>
