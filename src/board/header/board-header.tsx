@@ -3,6 +3,7 @@ import { Logo, Plus, VerticalDots } from '@/icons'
 import { BoardHeaderPopover } from './board-header-popover'
 import { useRef } from 'react'
 import { Board } from '@/boards/boards-schemas'
+import { Link } from '@tanstack/react-router'
 
 type BoardHeaderProps = {
     board: Board
@@ -21,9 +22,12 @@ export const BoardHeader = ({ board }: BoardHeaderProps) => {
             <BoardHeaderPopover board={board} headerRef={ref} />
 
             <div className="ml-auto flex items-center gap-4">
-                <Button size="icon">
-                    <Plus className="w-3" />
-                </Button>
+                <Link to="/boards/$boardId/add" params={{ boardId: board.id }}>
+                    <Button className="capitalize" size="icon">
+                        <Plus className=" w-3 md:hidden" />
+                        <span className="hidden md:block">+ Add new task</span>
+                    </Button>
+                </Link>
 
                 <VerticalDots className="h-4 w-2" />
             </div>
