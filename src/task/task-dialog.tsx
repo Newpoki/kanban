@@ -1,14 +1,16 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
-import { Board } from '@/boards/boards-schemas'
+import { Board, BoardColumn, BoardColumnTask } from '@/boards/boards-schemas'
 import { TaskDialogForm } from './task-dialog-form'
 
 type TaskProps = {
     boardId: Board['id']
     isOpen: boolean
     onClose: () => void
+    columnId?: BoardColumn['id']
+    taskId?: BoardColumnTask['id']
 }
 
-export const TaskDialog = ({ boardId, isOpen, onClose }: TaskProps) => {
+export const TaskDialog = ({ boardId, isOpen, onClose, columnId, taskId }: TaskProps) => {
     return (
         <Dialog open={isOpen} onOpenChange={onClose}>
             <DialogContent className="pb-8">
@@ -16,7 +18,7 @@ export const TaskDialog = ({ boardId, isOpen, onClose }: TaskProps) => {
                     <DialogTitle>Add new task</DialogTitle>
                 </DialogHeader>
 
-                <TaskDialogForm boardId={boardId} />
+                <TaskDialogForm boardId={boardId} columnId={columnId} taskId={taskId} />
             </DialogContent>
         </Dialog>
     )

@@ -27,7 +27,12 @@ export const TaskDropdown = ({ boardId, columnId, taskId }: TaskDropdownProps) =
                 </div>
             </DropdownMenuTrigger>
             <DropdownMenuContent sideOffset={16}>
-                <DropdownMenuItem>Edit task</DropdownMenuItem>
+                <Link
+                    to="/boards/$boardId/column/$columnId/task/$taskId/edit"
+                    params={{ boardId, columnId, taskId }}
+                >
+                    <DropdownMenuItem>Edit task</DropdownMenuItem>
+                </Link>
                 <Link
                     to="/boards/$boardId/column/$columnId/task/$taskId/delete"
                     params={{ boardId, columnId, taskId }}

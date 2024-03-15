@@ -3,7 +3,7 @@ import { BoardsStore } from './boards-store'
 
 type SelectBoardsTaskInput = {
     boardId: Board['id']
-    taskId: BoardColumnTask['id']
+    taskId: BoardColumnTask['id'] | undefined
 }
 
 export const selectBoardsTask =

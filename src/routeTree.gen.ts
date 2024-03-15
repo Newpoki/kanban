@@ -15,6 +15,7 @@ import { Route as IndexImport } from './routes/index'
 import { Route as BoardsBoardIdImport } from './routes/boards.$boardId'
 import { Route as BoardsBoardIdAddImport } from './routes/boards.$boardId.add'
 import { Route as BoardsBoardIdColumnColumnIdTaskTaskIdIndexImport } from './routes/boards.$boardId.column.$columnId.task.$taskId.index'
+import { Route as BoardsBoardIdColumnColumnIdTaskTaskIdEditImport } from './routes/boards.$boardId.column.$columnId.task.$taskId.edit'
 import { Route as BoardsBoardIdColumnColumnIdTaskTaskIdDeleteImport } from './routes/boards.$boardId.column.$columnId.task.$taskId.delete'
 
 // Create/Update Routes
@@ -37,6 +38,12 @@ const BoardsBoardIdAddRoute = BoardsBoardIdAddImport.update({
 const BoardsBoardIdColumnColumnIdTaskTaskIdIndexRoute =
   BoardsBoardIdColumnColumnIdTaskTaskIdIndexImport.update({
     path: '/column/$columnId/task/$taskId/',
+    getParentRoute: () => BoardsBoardIdRoute,
+  } as any)
+
+const BoardsBoardIdColumnColumnIdTaskTaskIdEditRoute =
+  BoardsBoardIdColumnColumnIdTaskTaskIdEditImport.update({
+    path: '/column/$columnId/task/$taskId/edit',
     getParentRoute: () => BoardsBoardIdRoute,
   } as any)
 
@@ -66,6 +73,10 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BoardsBoardIdColumnColumnIdTaskTaskIdDeleteImport
       parentRoute: typeof BoardsBoardIdImport
     }
+    '/boards/$boardId/column/$columnId/task/$taskId/edit': {
+      preLoaderRoute: typeof BoardsBoardIdColumnColumnIdTaskTaskIdEditImport
+      parentRoute: typeof BoardsBoardIdImport
+    }
     '/boards/$boardId/column/$columnId/task/$taskId/': {
       preLoaderRoute: typeof BoardsBoardIdColumnColumnIdTaskTaskIdIndexImport
       parentRoute: typeof BoardsBoardIdImport
@@ -80,6 +91,7 @@ export const routeTree = rootRoute.addChildren([
   BoardsBoardIdRoute.addChildren([
     BoardsBoardIdAddRoute,
     BoardsBoardIdColumnColumnIdTaskTaskIdDeleteRoute,
+    BoardsBoardIdColumnColumnIdTaskTaskIdEditRoute,
     BoardsBoardIdColumnColumnIdTaskTaskIdIndexRoute,
   ]),
 ])
