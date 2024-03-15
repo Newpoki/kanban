@@ -1,4 +1,4 @@
-import { TaskCreate } from '@/task/task-create'
+import { TaskDialog } from '@/task/task-dialog'
 import { createFileRoute, useNavigate } from '@tanstack/react-router'
 import { useCallback, useState } from 'react'
 
@@ -23,5 +23,5 @@ function BoardTaskCreateTaskComponent() {
         }, 300)
     }, [boardId, navigate])
 
-    return <TaskCreate boardId={boardId} isOpen={isOpen} onClose={handleCloseDialog} />
+    return <TaskDialog boardId={boardId} isOpen={isOpen} onClose={handleCloseDialog} />
 }

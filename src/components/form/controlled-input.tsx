@@ -21,19 +21,22 @@ export function ControlledInput<TFieldValues extends FieldValues>({
         <FormField
             control={control}
             name={name}
-            render={({ field, fieldState }) => (
-                <FormItem className="w-full">
-                    {label && <FormLabel>{label}</FormLabel>}
-                    <FormControl>
-                        <Input
-                            {...field}
-                            className={className}
-                            placeholder={placeholder}
-                            error={fieldState.error?.message}
-                        />
-                    </FormControl>
-                </FormItem>
-            )}
+            render={({ field, fieldState }) => {
+                return (
+                    <FormItem className="w-full">
+                        {label && <FormLabel>{label}</FormLabel>}
+                        <FormControl>
+                            <Input
+                                {...field}
+                                value={field.value ?? ''}
+                                className={className}
+                                placeholder={placeholder}
+                                error={fieldState.error?.message}
+                            />
+                        </FormControl>
+                    </FormItem>
+                )
+            }}
         />
     )
 }

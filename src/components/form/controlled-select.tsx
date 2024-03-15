@@ -32,16 +32,16 @@ export function ControlledSelect<TFieldValues extends FieldValues, TOption exten
         <FormField
             control={control}
             name={name}
-            render={({ field }) => (
+            render={({ field: { ref, onChange, ...othersField } }) => (
                 <FormItem className="w-full">
                     {label && <FormLabel>{label}</FormLabel>}
                     <FormControl>
-                        <Select {...field} onValueChange={field.onChange}>
+                        <Select {...othersField} onValueChange={onChange}>
                             <SelectTrigger className="w-full">
                                 <SelectValue />
                             </SelectTrigger>
 
-                            <SelectContent className={className}>
+                            <SelectContent className={className} ref={ref}>
                                 {options.map((option) => {
                                     const optionValue = getOptionValue(option)
                                     const optionLabel = getOptionLabel(option)
