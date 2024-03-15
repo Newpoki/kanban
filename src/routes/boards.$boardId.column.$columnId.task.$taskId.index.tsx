@@ -1,7 +1,13 @@
 import { BoardColumn } from '@/boards/boards-schemas'
 import { selectBoardsTask } from '@/boards/boards-selectors'
 import { useBoardsStore } from '@/boards/boards-store'
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
+import {
+    Dialog,
+    DialogContent,
+    DialogContentInner,
+    DialogHeader,
+    DialogTitle,
+} from '@/components/ui/dialog'
 import {
     Select,
     SelectContent,
@@ -85,49 +91,54 @@ function BoardTaskComponent() {
                     <TaskDropdown boardId={boardId} columnId={columnId} taskId={taskId} />
                 </DialogHeader>
 
-                <p className="text-l text-grey-500">{task.description}</p>
+                <DialogContentInner>
+                    <p className="text-l text-grey-500">{task.description}</p>
 
-                <section>
-                    <h3 className="mb-4 text-m text-grey-500 dark:text-white">
-                        Subtasks ({doneCount} of {task.subtasks.length})
-                    </h3>
-
-                    <ul className="flex flex-col gap-2">
-                        {task.subtasks.map((subtask) => {
-                            return (
-                                <Subtask
-                                    key={subtask.id}
-                                    boardId={boardId}
-                                    columnId={columnId}
-                                    taskId={taskId}
-                                    subtask={subtask}
-                                />
-                            )
-                        })}
-                    </ul>
-                </section>
-
-                {taskColumn != null && statusesOptions.length > 0 && (
                     <section>
-                        <h3 className="mb-2 text-m text-grey-500 dark:text-white">
-                            Current status
+                        <h3 className="mb-4 text-m text-grey-500 dark:text-white">
+                            Subtasks ({doneCount} of {task.subtasks.length})
                         </h3>
 
-                        <Select defaultValue={taskColumn.id} onValueChange={handleChangeTaskColumn}>
-                            <SelectTrigger className="w-full">
-                                <SelectValue />
-                            </SelectTrigger>
-
-                            <SelectContent>
-                                {statusesOptions.map((option) => (
-                                    <SelectItem key={option.id} value={option.id}>
-                                        {option.name}
-                                    </SelectItem>
-                                ))}
-                            </SelectContent>
-                        </Select>
+                        <ul className="flex flex-col gap-2">
+                            {task.subtasks.map((subtask) => {
+                                return (
+                                    <Subtask
+                                        key={subtask.id}
+                                        boardId={boardId}
+                                        columnId={columnId}
+                                        taskId={taskId}
+                                        subtask={subtask}
+                                    />
+                                )
+                            })}
+                        </ul>
                     </section>
-                )}
+
+                    {taskColumn != null && statusesOptions.length > 0 && (
+                        <section>
+                            <h3 className="mb-2 text-m text-grey-500 dark:text-white">
+                                Current status
+                            </h3>
+
+                            <Select
+                                defaultValue={taskColumn.id}
+                                onValueChange={handleChangeTaskColumn}
+                            >
+                                <SelectTrigger className="w-full">
+                                    <SelectValue />
+                                </SelectTrigger>
+
+                                <SelectContent>
+                                    {statusesOptions.map((option) => (
+                                        <SelectItem key={option.id} value={option.id}>
+                                            {option.name}
+                                        </SelectItem>
+                                    ))}
+                                </SelectContent>
+                            </Select>
+                        </section>
+                    )}
+                </DialogContentInner>
             </DialogContent>
         </Dialog>
     )

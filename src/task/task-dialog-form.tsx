@@ -23,7 +23,7 @@ export const TaskDialogForm = ({ boardId, columnId, taskId }: TaskDialogFormProp
     return (
         <ControlledForm
             formContext={formContext}
-            className="flex flex-col gap-6"
+            className="flex flex-col gap-6 overflow-hidden"
             onSubmit={onSubmit}
         >
             <TaskDialogFormContent statusesOptions={statusesOptions} />

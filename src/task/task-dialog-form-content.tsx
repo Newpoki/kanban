@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button'
 import { BoardColumnTaskSubtask } from '@/boards/boards-schemas'
 import { ControlledSelect } from '@/components/form/controlled-select'
 import { TaskDialogFormContentSubtasks } from './task-dialog-form-content-subtasks'
+import { DialogContentInner } from '@/components/ui/dialog'
 
 type TaskDialogFormContentProps = {
     statusesOptions: Array<{
@@ -17,27 +18,31 @@ type TaskDialogFormContentProps = {
 export const TaskDialogFormContent = ({ statusesOptions }: TaskDialogFormContentProps) => {
     return (
         <>
-            <ControlledInput
-                label="Title"
-                placeholder="e.g. Take coffee break"
-                name={getFieldKey<TaskDialogFormValues>('name')}
-            />
+            <DialogContentInner className="gap-6">
+                <ControlledInput
+                    label="Title"
+                    placeholder="e.g. Take coffee break"
+                    name={getFieldKey<TaskDialogFormValues>('name')}
+                />
 
-            <ControlledTextarea
-                label="Description"
-                placeholder="e.g. Take coffee break"
-                name={getFieldKey<TaskDialogFormValues>('description')}
-            />
+                <ControlledTextarea
+                    label="Description"
+                    placeholder="e.g. Take coffee break"
+                    name={getFieldKey<TaskDialogFormValues>('description')}
+                />
 
-            <TaskDialogFormContentSubtasks />
+                <TaskDialogFormContentSubtasks />
 
-            <ControlledSelect
-                label="status"
-                options={statusesOptions}
-                name={getFieldKey<TaskDialogFormValues>('status')}
-            />
+                <ControlledSelect
+                    label="status"
+                    options={statusesOptions}
+                    name={getFieldKey<TaskDialogFormValues>('status')}
+                />
+            </DialogContentInner>
 
-            <Button size="small"> Task</Button>
+            <Button size="small" className="mx-6">
+                Create Task
+            </Button>
         </>
     )
 }
