@@ -2,19 +2,43 @@ import * as React from 'react'
 
 import { cn } from '@/lib/utils'
 
-export interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {}
+export interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+    error?: string
+}
 
 const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
-    ({ className, ...props }, ref) => {
+    ({ className, error, ...props }, ref) => {
+        const hasError = error != null && error.length > 0
+
         return (
-            <textarea
+            <label
                 className={cn(
-                    'dark:placeholder:text-slate-400  dark:focus-visible:ring-slate-300 flex min-h-[112px] w-full rounded-md border border-grey-500/25 bg-transparent px-3 py-2 text-l shadow-sm placeholder:text-black/25 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-purple-300 disabled:cursor-not-allowed disabled:opacity-50 dark:text-white dark:placeholder:text-white/25',
-                    className
+                    'flex w-full items-start gap-2 rounded-md border border-grey-500/25 px-4 py-2 text-l text-black ring-purple-300 transition-colors has-[:focus-visible]:ring-1 has-[:focus-visible]:ring-purple-300 dark:text-white',
+                    {
+                        'border-red-500 has-[:focus-visible]:ring-red-500':
+                            error != null && error.length > 0,
+                    }
                 )}
-                ref={ref}
-                {...props}
-            />
+            >
+                <textarea
+                    className={cn(
+                        'min-h-[112px] w-full resize-none bg-transparent outline-none',
+                        className
+                    )}
+                    {...props}
+                    ref={ref}
+                />
+
+                {error && (
+                    <span
+                        className={cn('whitespace-nowrap', {
+                            'text-red-500': hasError,
+                        })}
+                    >
+                        {error}
+                    </span>
+                )}
+            </label>
         )
     }
 )
