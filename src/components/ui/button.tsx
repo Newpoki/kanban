@@ -15,8 +15,8 @@ export const buttonVariants = cva(
                     'bg-purple-500/10 text-purple-500 hover:bg-purple-500/25 dark:bg-white dark:hover:bg-white/90',
             },
             size: {
-                default: 'py-4 px-8 rounded-3xl',
-                small: 'p-2 rounded-[20px] px-6',
+                default: 'py-[14.25px] px-8 rounded-3xl',
+                small: 'p-[10.25px] rounded-[20px] px-6',
                 icon: 'py-[10px] px-5 rounded-3xl',
             },
         },
