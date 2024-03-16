@@ -41,7 +41,7 @@ export const useBoardForm = ({ board }: UseBoardFormInput) => {
     const handleCreateBoard = useCallback(
         (formValues: BoardAddOrEditDialogFormValues) => {
             const createdBoard: Board = {
-                id: uuidv4(),
+                id: formValues.id,
                 name: formValues.name,
                 columns: formValues.columns.map((column) => ({ ...column, tasks: [] })),
             }
