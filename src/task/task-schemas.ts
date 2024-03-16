@@ -7,8 +7,8 @@ export const taskDialogFormValuesSubtaskSchema = z.object({
 
 export const taskDialogFormValuesSchema = z.object({
     id: z.string().optional(),
-    name: z.string().min(1, { message: "Can't be empty" }),
-    description: z.string(),
+    name: z.string().trim().min(1, { message: "Can't be empty" }),
+    description: z.string().trim(),
     subtasks: z.array(taskDialogFormValuesSubtaskSchema),
     status: z.string(),
 })

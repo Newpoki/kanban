@@ -15,6 +15,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from '@/components/ui/select'
+import { cn } from '@/lib/utils'
 import { Subtask } from '@/subtask/subtask'
 import { TaskDropdown } from '@/task/task-dropdown'
 import { createFileRoute, useNavigate } from '@tanstack/react-router'
@@ -92,7 +93,13 @@ function BoardTaskComponent() {
                 </DialogHeader>
 
                 <DialogContentInner>
-                    <p className="text-l text-grey-500">{task.description}</p>
+                    <p
+                        className={cn('text-l text-grey-500', {
+                            italic: task.description.length === 0,
+                        })}
+                    >
+                        {task.description.length === 0 ? 'No description yet' : task.description}
+                    </p>
 
                     <section>
                         <h3 className="mb-4 text-m text-grey-500 dark:text-white">
