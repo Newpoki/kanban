@@ -35,7 +35,7 @@ export const BoardDeleteDialog = ({ board, isOpen, onClose }: BoardDeleteDialogP
         <AlertDialog open={isOpen} onOpenChange={handleClose}>
             <AlertDialogContent>
                 <AlertDialogHeader>
-                    <AlertDialogTitle>Delete this task?</AlertDialogTitle>
+                    <AlertDialogTitle>Delete this board?</AlertDialogTitle>
                     <AlertDialogDescription>
                         Are you sure you want to delete the <b>{board?.name} </b>
                         board? This action will remove all columns and tasks and cannot be reversed.

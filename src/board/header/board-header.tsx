@@ -1,9 +1,10 @@
 import { Button } from '@/components/ui/button'
-import { Logo, Plus, VerticalDots } from '@/icons'
+import { Logo, Plus } from '@/icons'
 import { BoardHeaderPopover } from './board-header-popover'
 import { useRef } from 'react'
 import { Board } from '@/boards/boards-schemas'
 import { Link } from '@tanstack/react-router'
+import { BoardHeaderDropdown } from './board-header-dropdown'
 
 type BoardHeaderProps = {
     board: Board
@@ -33,7 +34,7 @@ export const BoardHeader = ({ board }: BoardHeaderProps) => {
                     </Button>
                 </Link>
 
-                <VerticalDots className="h-5 w-1" />
+                <BoardHeaderDropdown boardId={board.id} />
             </div>
         </header>
     )

@@ -44,7 +44,7 @@ const AlertDialogContent = React.forwardRef<
 AlertDialogContent.displayName = AlertDialogPrimitive.Content.displayName
 
 const AlertDialogHeader = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (
-    <div className={cn('sm:text-left flex flex-col space-y-2 text-center', className)} {...props} />
+    <div className={cn('sm:text-left flex flex-col gap-6 text-center', className)} {...props} />
 )
 AlertDialogHeader.displayName = 'AlertDialogHeader'
 

@@ -1,4 +1,4 @@
-import { Board, BoardColumn, BoardColumnTask } from '@/boards/boards-schemas'
+import { Board } from '@/boards/boards-schemas'
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -8,13 +8,11 @@ import {
 import { VerticalDots } from '@/icons'
 import { Link } from '@tanstack/react-router'
 
-type TaskDialogDropdownProps = {
+type BoardHeaderDropdownProps = {
     boardId: Board['id']
-    columnId: BoardColumn['id']
-    taskId: BoardColumnTask['id']
 }
 
-export const TaskDialogDropdown = ({ boardId, columnId, taskId }: TaskDialogDropdownProps) => {
+export const BoardHeaderDropdown = ({ boardId }: BoardHeaderDropdownProps) => {
     return (
         <DropdownMenu
             // Must use modal={false} otherwise the AlertDialog will leave `event-pointer: none`
@@ -23,22 +21,16 @@ export const TaskDialogDropdown = ({ boardId, columnId, taskId }: TaskDialogDrop
         >
             <DropdownMenuTrigger>
                 <div className="flex px-2">
-                    <VerticalDots className="h-5 w-2" />
+                    <VerticalDots className="h-5 w-1" />
                 </div>
             </DropdownMenuTrigger>
-            <DropdownMenuContent sideOffset={16}>
-                <Link
-                    to="/boards/$boardId/column/$columnId/task/$taskId/edit"
-                    params={{ boardId, columnId, taskId }}
-                >
-                    <DropdownMenuItem>Edit task</DropdownMenuItem>
+            <DropdownMenuContent sideOffset={24} align="end">
+                <Link to="/boards/$boardId/edit" params={{ boardId }}>
+                    <DropdownMenuItem>Edit board</DropdownMenuItem>
                 </Link>
-                <Link
-                    to="/boards/$boardId/column/$columnId/task/$taskId/delete"
-                    params={{ boardId, columnId, taskId }}
-                >
+                <Link to="/boards/$boardId/delete" params={{ boardId }}>
                     <DropdownMenuItem className="text-red-500 focus:bg-red-500/30 focus:text-red-500 dark:text-red-500 focus:dark:bg-red-500/30 dark:focus:text-red-500">
-                        <span className="text-l">Delete task</span>
+                        <span className="text-l">Delete board</span>
                     </DropdownMenuItem>
                 </Link>
             </DropdownMenuContent>
