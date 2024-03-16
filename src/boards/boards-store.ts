@@ -9,6 +9,7 @@ import {
     boardsMapSchema,
 } from './boards-schemas'
 import { persist } from 'zustand/middleware'
+import omit from 'lodash.omit'
 
 const DEFAULT_BOARD: Board = {
     id: uuidv4(),
@@ -269,6 +270,10 @@ type EditBoardPayload = {
     board: Board
 }
 
+type DeleteBoardPayload = {
+    boardId: Board['id']
+}
+
 export type BoardsStore = {
     data: BoardsMap
     changeSubtaskStatus: (payload: ChangeSubtaskStatusPayload) => void
@@ -278,12 +283,16 @@ export type BoardsStore = {
     editTask: (payload: EditTaskPayload) => void
     addBoard: (payload: AddBoardPayload) => void
     editBoard: (payload: EditBoardPayload) => void
+    deleteBoard: (payload: DeleteBoardPayload) => void
 }
 
 export const useBoardsStore = create(
     persist<BoardsStore>(
         (set, get) => ({
             data: getInitialBoardsMap(),
+            deleteBoard: ({ boardId }) => {
+                set((state) => ({ data: omit(state.data, [boardId]) }))
+            },
             addBoard: ({ board }) => {
                 set((state) => ({ data: { ...state.data, [board.id]: board } }))
             },

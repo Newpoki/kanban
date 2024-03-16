@@ -21,5 +21,5 @@ export const selectBoardsTask =
 export const selectBoardById =
     ({ boardId }: SelectBoardByIdInput) =>
     (boardsStore: BoardsStore) => {
-        return boardsStore.data[boardId]
+        return boardId != null ? boardsStore.data[boardId] : undefined
     }
