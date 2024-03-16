@@ -1,10 +1,10 @@
 import { Board, BoardColumn, BoardColumnTask } from '@/boards/boards-schemas'
 import { useForm } from 'react-hook-form'
-import { TaskDialogFormValues, taskDialogFormValuesSchema } from './task-schemas'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { ControlledForm } from '@/components/form/controlled-form'
 import { TaskDialogFormContent } from './task-dialog-form-content'
 import { useTaskForm } from './use-task-form'
+import { TaskDialogFormValues, taskDialogFormValuesSchema } from '../task-schemas'
 
 type TaskDialogFormProps = {
     boardId: Board['id']

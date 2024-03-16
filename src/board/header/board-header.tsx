@@ -22,8 +22,8 @@ export const BoardHeader = ({ board }: BoardHeaderProps) => {
             <BoardHeaderPopover board={board} headerRef={ref} />
 
             <div className="ml-auto flex items-center gap-4">
-                <Link to="/boards/$boardId/add" params={{ boardId: board.id }}>
-                    <Button className="px-[18px] capitalize" size="small">
+                <Link to="/boards/$boardId/add-task" params={{ boardId: board.id }}>
+                    <Button className="px-[18px] capitalize">
                         <Plus className="w-3 md:hidden" />
                         <span className="hidden md:block">+ Add new task</span>
                     </Button>

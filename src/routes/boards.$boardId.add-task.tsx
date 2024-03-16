@@ -1,8 +1,8 @@
-import { TaskDialog } from '@/task/task-dialog'
+import { TaskDialog } from '@/task/dialog-form/task-dialog'
 import { createFileRoute, useNavigate } from '@tanstack/react-router'
 import { useCallback, useState } from 'react'
 
-export const Route = createFileRoute('/boards/$boardId/add')({
+export const Route = createFileRoute('/boards/$boardId/add-task')({
     component: BoardTaskCreateTaskComponent,
 })
 

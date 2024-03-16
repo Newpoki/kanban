@@ -1,10 +1,10 @@
 import { FormLabel } from '@/components/ui/form'
-import { TaskDialogFormValues } from './task-schemas'
 import { useFieldArray, useFormContext } from 'react-hook-form'
 import { useCallback } from 'react'
 import { Button } from '@/components/ui/button'
 import { v4 as uuidv4 } from 'uuid'
 import { TaskDialogFormContentSubtaskField } from './task-dialog-form-content-subtask-field'
+import { TaskDialogFormValues } from '../task-schemas'
 
 export const TaskDialogFormContentSubtasks = () => {
     const { control } = useFormContext<TaskDialogFormValues>()

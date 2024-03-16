@@ -1,12 +1,12 @@
 import { ControlledInput } from '@/components/form/controlled-input'
 import { ControlledTextarea } from '@/components/form/controlled-textarea'
 import { getFieldKey } from '@/lib/get-field-key'
-import { TaskDialogFormValues } from './task-schemas'
 import { Button } from '@/components/ui/button'
 import { BoardColumnTaskSubtask } from '@/boards/boards-schemas'
 import { ControlledSelect } from '@/components/form/controlled-select'
 import { TaskDialogFormContentSubtasks } from './task-dialog-form-content-subtasks'
 import { DialogContentInner } from '@/components/ui/dialog'
+import { TaskDialogFormValues } from '../task-schemas'
 
 type TaskDialogFormContentProps = {
     isEditing: boolean

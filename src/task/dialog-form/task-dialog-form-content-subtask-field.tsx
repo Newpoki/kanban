@@ -1,10 +1,10 @@
 import { ControlledInput, ControlledInputProps } from '@/components/form/controlled-input'
 import { Close } from '@/icons'
-import { TaskDialogFormValues } from './task-schemas'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { useCallback } from 'react'
 import { useForm } from 'react-hook-form'
+import { TaskDialogFormValues } from '../task-schemas'
 
 type TaskDialogFormContentSubtaskFieldProps = Omit<
     ControlledInputProps<TaskDialogFormValues>,

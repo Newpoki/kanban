@@ -13,7 +13,7 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
 import { Route as BoardsBoardIdImport } from './routes/boards.$boardId'
-import { Route as BoardsBoardIdAddImport } from './routes/boards.$boardId.add'
+import { Route as BoardsBoardIdAddTaskImport } from './routes/boards.$boardId.add-task'
 import { Route as BoardsBoardIdColumnColumnIdTaskTaskIdIndexImport } from './routes/boards.$boardId.column.$columnId.task.$taskId.index'
 import { Route as BoardsBoardIdColumnColumnIdTaskTaskIdEditImport } from './routes/boards.$boardId.column.$columnId.task.$taskId.edit'
 import { Route as BoardsBoardIdColumnColumnIdTaskTaskIdDeleteImport } from './routes/boards.$boardId.column.$columnId.task.$taskId.delete'
@@ -30,8 +30,8 @@ const BoardsBoardIdRoute = BoardsBoardIdImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const BoardsBoardIdAddRoute = BoardsBoardIdAddImport.update({
-  path: '/add',
+const BoardsBoardIdAddTaskRoute = BoardsBoardIdAddTaskImport.update({
+  path: '/add-task',
   getParentRoute: () => BoardsBoardIdRoute,
 } as any)
 
@@ -65,8 +65,8 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BoardsBoardIdImport
       parentRoute: typeof rootRoute
     }
-    '/boards/$boardId/add': {
-      preLoaderRoute: typeof BoardsBoardIdAddImport
+    '/boards/$boardId/add-task': {
+      preLoaderRoute: typeof BoardsBoardIdAddTaskImport
       parentRoute: typeof BoardsBoardIdImport
     }
     '/boards/$boardId/column/$columnId/task/$taskId/delete': {
@@ -89,7 +89,7 @@ declare module '@tanstack/react-router' {
 export const routeTree = rootRoute.addChildren([
   IndexRoute,
   BoardsBoardIdRoute.addChildren([
-    BoardsBoardIdAddRoute,
+    BoardsBoardIdAddTaskRoute,
     BoardsBoardIdColumnColumnIdTaskTaskIdDeleteRoute,
     BoardsBoardIdColumnColumnIdTaskTaskIdEditRoute,
     BoardsBoardIdColumnColumnIdTaskTaskIdIndexRoute,
