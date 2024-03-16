@@ -1,16 +1,16 @@
 import { z } from 'zod'
 
-export const taskDialogFormValuesSubtaskSchema = z.object({
+export const taskAddOrEditDialogFormValuesSubtaskSchema = z.object({
     id: z.string(),
     name: z.string().min(1, { message: "Can't be empty" }),
 })
 
-export const taskDialogFormValuesSchema = z.object({
+export const taskAddOrEditDialogFormValuesSchema = z.object({
     id: z.string().optional(),
     name: z.string().trim().min(1, { message: "Can't be empty" }),
     description: z.string().trim(),
-    subtasks: z.array(taskDialogFormValuesSubtaskSchema),
+    subtasks: z.array(taskAddOrEditDialogFormValuesSubtaskSchema),
     status: z.string(),
 })
 
-export type TaskDialogFormValues = z.infer<typeof taskDialogFormValuesSchema>
+export type TaskAddOrEditDialogFormValues = z.infer<typeof taskAddOrEditDialogFormValuesSchema>

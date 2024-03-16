@@ -1,6 +1,6 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { Board, BoardColumn, BoardColumnTask } from '@/boards/boards-schemas'
-import { TaskDialogForm } from './task-dialog-form'
+import { TaskAddOrEditDialogForm } from './task-add-or-edit-dialog-form'
 
 type TaskProps = {
     boardId: Board['id']
@@ -10,7 +10,7 @@ type TaskProps = {
     taskId?: BoardColumnTask['id']
 }
 
-export const TaskDialog = ({ boardId, isOpen, onClose, columnId, taskId }: TaskProps) => {
+export const TaskAddOrEditDialog = ({ boardId, isOpen, onClose, columnId, taskId }: TaskProps) => {
     const isEditing = taskId != null
 
     return (
@@ -20,7 +20,7 @@ export const TaskDialog = ({ boardId, isOpen, onClose, columnId, taskId }: TaskP
                     <DialogTitle>{isEditing ? 'Edit task' : 'Add new task'}</DialogTitle>
                 </DialogHeader>
 
-                <TaskDialogForm
+                <TaskAddOrEditDialogForm
                     boardId={boardId}
                     columnId={columnId}
                     isEditing={isEditing}

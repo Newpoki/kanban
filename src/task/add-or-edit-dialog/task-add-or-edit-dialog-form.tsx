@@ -2,23 +2,28 @@ import { Board, BoardColumn, BoardColumnTask } from '@/boards/boards-schemas'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { ControlledForm } from '@/components/form/controlled-form'
-import { TaskDialogFormContent } from './task-dialog-form-content'
+import { TaskAddOrEditDialogFormContent } from './task-add-or-edit-dialog-form-content'
 import { useTaskForm } from './use-task-form'
-import { TaskDialogFormValues, taskDialogFormValuesSchema } from '../task-schemas'
+import { TaskAddOrEditDialogFormValues, taskAddOrEditDialogFormValuesSchema } from '../task-schemas'
 
-type TaskDialogFormProps = {
+type TaskAddOrEditDialogFormProps = {
     boardId: Board['id']
     columnId?: BoardColumn['id']
     isEditing: boolean
     taskId?: BoardColumnTask['id']
 }
 
-export const TaskDialogForm = ({ boardId, columnId, isEditing, taskId }: TaskDialogFormProps) => {
+export const TaskAddOrEditDialogForm = ({
+    boardId,
+    columnId,
+    isEditing,
+    taskId,
+}: TaskAddOrEditDialogFormProps) => {
     const { defaultValues, onSubmit, statusesOptions } = useTaskForm({ boardId, columnId, taskId })
 
-    const formContext = useForm<TaskDialogFormValues>({
+    const formContext = useForm<TaskAddOrEditDialogFormValues>({
         defaultValues,
-        resolver: zodResolver(taskDialogFormValuesSchema),
+        resolver: zodResolver(taskAddOrEditDialogFormValuesSchema),
     })
 
     return (
@@ -27,7 +32,10 @@ export const TaskDialogForm = ({ boardId, columnId, isEditing, taskId }: TaskDia
             className="flex flex-col gap-6 overflow-hidden"
             onSubmit={onSubmit}
         >
-            <TaskDialogFormContent isEditing={isEditing} statusesOptions={statusesOptions} />
+            <TaskAddOrEditDialogFormContent
+                isEditing={isEditing}
+                statusesOptions={statusesOptions}
+            />
         </ControlledForm>
     )
 }

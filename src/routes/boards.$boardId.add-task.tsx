@@ -1,4 +1,4 @@
-import { TaskDialog } from '@/task/dialog-form/task-dialog'
+import { TaskAddOrEditDialog } from '@/task/add-or-edit-dialog/task-add-or-edit-dialog'
 import { createFileRoute, useNavigate } from '@tanstack/react-router'
 import { useCallback, useState } from 'react'
 
@@ -23,5 +23,5 @@ function BoardTaskCreateTaskComponent() {
         }, 300)
     }, [boardId, navigate])
 
-    return <TaskDialog boardId={boardId} isOpen={isOpen} onClose={handleCloseDialog} />
+    return <TaskAddOrEditDialog boardId={boardId} isOpen={isOpen} onClose={handleCloseDialog} />
 }

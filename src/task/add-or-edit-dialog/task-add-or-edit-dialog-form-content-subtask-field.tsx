@@ -4,23 +4,23 @@ import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { useCallback } from 'react'
 import { useForm } from 'react-hook-form'
-import { TaskDialogFormValues } from '../task-schemas'
+import { TaskAddOrEditDialogFormValues } from '../task-schemas'
 
-type TaskDialogFormContentSubtaskFieldProps = Omit<
-    ControlledInputProps<TaskDialogFormValues>,
+type TaskAddOrEditDialogFormContentSubtaskFieldProps = Omit<
+    ControlledInputProps<TaskAddOrEditDialogFormValues>,
     'name'
 > & {
     index: number
     onDelete: (index: number) => void
 }
 
-export const TaskDialogFormContentSubtaskField = ({
+export const TaskAddOrEditDialogFormContentSubtaskField = ({
     className,
     onDelete,
     index,
     ...others
-}: TaskDialogFormContentSubtaskFieldProps) => {
-    const { register } = useForm<TaskDialogFormValues>()
+}: TaskAddOrEditDialogFormContentSubtaskFieldProps) => {
+    const { register } = useForm<TaskAddOrEditDialogFormValues>()
 
     const handleDelete = useCallback(() => {
         onDelete(index)

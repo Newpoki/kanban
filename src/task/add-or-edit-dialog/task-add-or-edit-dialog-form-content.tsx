@@ -4,11 +4,11 @@ import { getFieldKey } from '@/lib/get-field-key'
 import { Button } from '@/components/ui/button'
 import { BoardColumnTaskSubtask } from '@/boards/boards-schemas'
 import { ControlledSelect } from '@/components/form/controlled-select'
-import { TaskDialogFormContentSubtasks } from './task-dialog-form-content-subtasks'
 import { DialogContentInner } from '@/components/ui/dialog'
-import { TaskDialogFormValues } from '../task-schemas'
+import { TaskAddOrEditDialogFormValues } from '../task-schemas'
+import { TaskAddOrEditDialogFormContentSubtasks } from './task-add-or-edit-dialog-form-content-subtasks'
 
-type TaskDialogFormContentProps = {
+type TaskAddOrEditDialogFormContentProps = {
     isEditing: boolean
     statusesOptions: Array<{
         label: BoardColumnTaskSubtask['name']
@@ -16,31 +16,31 @@ type TaskDialogFormContentProps = {
     }>
 }
 
-export const TaskDialogFormContent = ({
+export const TaskAddOrEditDialogFormContent = ({
     isEditing,
     statusesOptions,
-}: TaskDialogFormContentProps) => {
+}: TaskAddOrEditDialogFormContentProps) => {
     return (
         <>
             <DialogContentInner className="gap-6">
                 <ControlledInput
                     label="Title"
                     placeholder="e.g. Take coffee break"
-                    name={getFieldKey<TaskDialogFormValues>('name')}
+                    name={getFieldKey<TaskAddOrEditDialogFormValues>('name')}
                 />
 
                 <ControlledTextarea
                     label="Description"
                     placeholder="e.g. Take coffee break"
-                    name={getFieldKey<TaskDialogFormValues>('description')}
+                    name={getFieldKey<TaskAddOrEditDialogFormValues>('description')}
                 />
 
-                <TaskDialogFormContentSubtasks />
+                <TaskAddOrEditDialogFormContentSubtasks />
 
                 <ControlledSelect
                     label="status"
                     options={statusesOptions}
-                    name={getFieldKey<TaskDialogFormValues>('status')}
+                    name={getFieldKey<TaskAddOrEditDialogFormValues>('status')}
                 />
             </DialogContentInner>
 

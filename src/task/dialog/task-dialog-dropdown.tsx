@@ -14,7 +14,7 @@ type TaskDropdownProps = {
     taskId: BoardColumnTask['id']
 }
 
-export const TaskDropdown = ({ boardId, columnId, taskId }: TaskDropdownProps) => {
+export const TaskDialogDropdown = ({ boardId, columnId, taskId }: TaskDropdownProps) => {
     return (
         <DropdownMenu
             // Must use modal={false} otherwise the AlertDialog will leave `event-pointer: none`

@@ -9,14 +9,19 @@ import { cn } from '@/lib/utils'
 import { useBoardsStore } from '@/boards/boards-store'
 import { useCallback } from 'react'
 
-type SubtaskProps = {
+type TaskDialogSubtaskProps = {
     boardId: Board['id']
     columnId: BoardColumn['id']
     taskId: BoardColumnTask['id']
     subtask: BoardColumnTaskSubtask
 }
 
-export const Subtask = ({ boardId, columnId, taskId, subtask }: SubtaskProps) => {
+export const TaskDialogSubtask = ({
+    boardId,
+    columnId,
+    taskId,
+    subtask,
+}: TaskDialogSubtaskProps) => {
     const changeSubtaskStatus = useBoardsStore((store) => store.changeSubtaskStatus)
 
     const isDone = subtask.status === 'done'
