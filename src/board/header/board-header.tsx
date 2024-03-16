@@ -23,13 +23,13 @@ export const BoardHeader = ({ board }: BoardHeaderProps) => {
 
             <div className="ml-auto flex items-center gap-4">
                 <Link to="/boards/$boardId/add" params={{ boardId: board.id }}>
-                    <Button className="capitalize">
-                        <Plus className=" w-3 md:hidden" />
+                    <Button className="px-[18px] capitalize" size="small">
+                        <Plus className="w-3 md:hidden" />
                         <span className="hidden md:block">+ Add new task</span>
                     </Button>
                 </Link>
 
-                <VerticalDots className="h-4 w-2" />
+                <VerticalDots className="h-5 w-1" />
             </div>
         </header>
     )
