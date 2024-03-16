@@ -2,9 +2,9 @@ import { Board, BoardColumn, BoardColumnTask } from '@/boards/boards-schemas'
 import { selectBoardsTask } from '@/boards/boards-selectors'
 import { useBoardsStore } from '@/boards/boards-store'
 import { useCallback, useMemo } from 'react'
-import { TaskDialogFormValues } from './task-schemas'
 import { v4 as uuidv4 } from 'uuid'
 import { useNavigate } from '@tanstack/react-router'
+import { TaskAddOrEditDialogFormValues } from '../task-schemas'
 
 type UseTaskFormInput = {
     boardId: Board['id']
@@ -30,7 +30,7 @@ export const useTaskForm = ({ boardId, taskId, columnId }: UseTaskFormInput) => 
 
     const navigate = useNavigate()
 
-    const defaultValues = useMemo<TaskDialogFormValues | undefined>(() => {
+    const defaultValues = useMemo<TaskAddOrEditDialogFormValues | undefined>(() => {
         const boardFirstColumn = statusesOptions[0]
 
         // This should never happen as we can't create a task when having no column yet

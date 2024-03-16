@@ -3,25 +3,25 @@ import { Close } from '@/icons'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { useCallback } from 'react'
-import { useForm } from 'react-hook-form'
-import { TaskAddOrEditDialogFormValues } from '../task-schemas'
+import { useFormContext } from 'react-hook-form'
+import { BoardAddOrEditDialogFormValues } from '../board-schemas'
 import { getFieldKey } from '@/lib/get-field-key'
 
-type TaskAddOrEditDialogFormContentSubtaskFieldProps = Omit<
-    ControlledInputProps<TaskAddOrEditDialogFormValues>,
+type BoardAddOrEditDialogFormContentColumnFieldProps = Omit<
+    ControlledInputProps<BoardAddOrEditDialogFormValues>,
     'name'
 > & {
     index: number
     onDelete: (index: number) => void
 }
 
-export const TaskAddOrEditDialogFormContentSubtaskField = ({
+export const BoardAddOrEditDialogFormContentColumnField = ({
     className,
     onDelete,
     index,
     ...others
-}: TaskAddOrEditDialogFormContentSubtaskFieldProps) => {
-    const { register } = useForm<TaskAddOrEditDialogFormValues>()
+}: BoardAddOrEditDialogFormContentColumnFieldProps) => {
+    const { register } = useFormContext<BoardAddOrEditDialogFormValues>()
 
     const handleDelete = useCallback(() => {
         onDelete(index)
@@ -29,16 +29,18 @@ export const TaskAddOrEditDialogFormContentSubtaskField = ({
 
     return (
         <div className="flex w-full items-center gap-2">
+            <input type="color" {...register(`columns.${index}.color`)} />
+
             <ControlledInput
                 {...others}
                 className={cn('w-full', className)}
-                name={getFieldKey<TaskAddOrEditDialogFormValues>(`subtasks.${index}.name`)}
+                name={getFieldKey<BoardAddOrEditDialogFormValues>(`columns.${index}.name`)}
             />
             <Button size="icon" variant="transparent" type="button" onClick={handleDelete}>
                 <Close className="h-4 w-4" />
             </Button>
 
-            <input hidden {...register(`subtasks.${index}.id`)} />
+            <input hidden {...register(`columns.${index}.id`)} />
         </div>
     )
 }

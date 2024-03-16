@@ -15,7 +15,7 @@ function BoardComponent() {
 
     return (
         <div className="flex min-h-[100dvh]">
-            <BoardsDrawer />
+            <BoardsDrawer boardId={boardId} />
             {board != null ? <Board board={board} /> : <BoardNotFound />}
         </div>
     )

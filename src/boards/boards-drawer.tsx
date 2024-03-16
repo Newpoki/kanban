@@ -3,8 +3,13 @@ import { BoardsList } from './boards-list'
 import { ThemeSelector } from '@/theme/theme-selector'
 import { useCallback, useState } from 'react'
 import { cn } from '@/lib/utils'
+import { Board } from './boards-schemas'
 
-export const BoardsDrawer = () => {
+type BoardsDrawerProps = {
+    boardId: Board['id']
+}
+
+export const BoardsDrawer = ({ boardId }: BoardsDrawerProps) => {
     const [isExpanded, setIsExpanded] = useState(true)
 
     const handleToggleDrawer = useCallback(() => {
@@ -15,7 +20,7 @@ export const BoardsDrawer = () => {
         <>
             <div
                 className={cn(
-                    'transition-width hidden w-[260px] flex-shrink-0 overflow-hidden border-r-[1px] border-grey-300 pb-8 pt-8 dark:border-grey-700 dark:bg-grey-800 md:flex md:flex-col',
+                    'hidden w-[260px] flex-shrink-0 overflow-hidden border-r-[1px] border-grey-300 pb-8 pt-8 transition-width dark:border-grey-700 dark:bg-grey-800 md:flex md:flex-col',
                     {
                         'w-0': !isExpanded,
                     }
@@ -28,7 +33,7 @@ export const BoardsDrawer = () => {
                         <LogoFull className="h-6 w-[125px] fill-black dark:fill-white" />
                     </section>
 
-                    <BoardsList />
+                    <BoardsList boardId={boardId} />
 
                     <div className="mt-auto">
                         <ThemeSelector className="mx-3 mb-4" />

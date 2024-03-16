@@ -1,8 +1,13 @@
 import { BoardsListItem } from './boards-list-item'
+import { Board } from './boards-schemas'
 import { useBoardsStore } from './boards-store'
 import { Link } from '@tanstack/react-router'
 
-export const BoardsList = () => {
+type BoardsListProps = {
+    boardId: Board['id']
+}
+
+export const BoardsList = ({ boardId }: BoardsListProps) => {
     const boards = useBoardsStore((store) => Object.values(store.data))
 
     return (
@@ -27,7 +32,9 @@ export const BoardsList = () => {
                 })}
             </ul>
 
-            <BoardsListItem variant="new" />
+            <Link to="/boards/$boardId/add" params={{ boardId: boardId }}>
+                <BoardsListItem variant="new" />
+            </Link>
         </>
     )
 }

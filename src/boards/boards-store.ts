@@ -261,6 +261,14 @@ type EditTaskPayload = {
     task: BoardColumnTask
 }
 
+type AddBoardPayload = {
+    board: Board
+}
+
+type EditBoardPayload = {
+    board: Board
+}
+
 export type BoardsStore = {
     data: BoardsMap
     changeSubtaskStatus: (payload: ChangeSubtaskStatusPayload) => void
@@ -268,12 +276,20 @@ export type BoardsStore = {
     deleteTask: (payload: DeleteTaskPayload) => void
     addTask: (payload: AddTaskPayload) => void
     editTask: (payload: EditTaskPayload) => void
+    addBoard: (payload: AddBoardPayload) => void
+    editBoard: (payload: EditBoardPayload) => void
 }
 
 export const useBoardsStore = create(
     persist<BoardsStore>(
         (set, get) => ({
             data: getInitialBoardsMap(),
+            addBoard: ({ board }) => {
+                set((state) => ({ data: { ...state.data, [board.id]: board } }))
+            },
+            editBoard: ({ board }) => {
+                set((state) => ({ data: { ...state.data, [board.id]: board } }))
+            },
             editTask: ({ boardId, columnId, task: editedTask }) => {
                 const board = get().data[boardId]
 

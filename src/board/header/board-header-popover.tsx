@@ -44,7 +44,7 @@ export const BoardHeaderPopover = ({ board, headerRef }: BoardHeaderPopoverProps
                 <PopoverAnchor virtualRef={headerRef} />
 
                 <PopoverContent className="flex flex-col p-0" sideOffset={10}>
-                    <BoardsList />
+                    <BoardsList boardId={board.id} />
 
                     <ThemeSelector className="m-4" />
                 </PopoverContent>

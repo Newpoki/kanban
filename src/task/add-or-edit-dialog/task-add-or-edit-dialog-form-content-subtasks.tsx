@@ -10,20 +10,13 @@ export const TaskAddOrEditDialogFormContentSubtasks = () => {
     const { control } = useFormContext<TaskAddOrEditDialogFormValues>()
     const { fields, remove, append } = useFieldArray({ control, name: 'subtasks', keyName: 'key' })
 
-    const handleDeleteSubtask = useCallback(
-        (subtaskIndex: number) => {
-            remove(subtaskIndex)
-        },
-        [remove]
-    )
-
     const handleAddSubtask = useCallback(() => {
         append({ name: '', id: uuidv4() }, { shouldFocus: true })
     }, [append])
 
     return (
         <div className="flex flex-col gap-2">
-            <FormLabel htmlFor="subtasks">Subtasks</FormLabel>
+            <FormLabel>Subtasks</FormLabel>
 
             <div className="flex flex-col gap-3">
                 {fields.map((field, index) => {
@@ -32,7 +25,7 @@ export const TaskAddOrEditDialogFormContentSubtasks = () => {
                             key={field.key}
                             placeholder="e.g. Make coffee"
                             index={index}
-                            onDelete={handleDeleteSubtask}
+                            onDelete={remove}
                         />
                     )
                 })}
