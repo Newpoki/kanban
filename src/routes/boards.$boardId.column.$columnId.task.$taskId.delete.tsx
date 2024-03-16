@@ -1,15 +1,6 @@
 import { selectBoardsTask } from '@/boards/boards-selectors'
 import { useBoardsStore } from '@/boards/boards-store'
-import {
-    AlertDialog,
-    AlertDialogAction,
-    AlertDialogCancel,
-    AlertDialogContent,
-    AlertDialogDescription,
-    AlertDialogFooter,
-    AlertDialogHeader,
-    AlertDialogTitle,
-} from '@/components/ui/alert-dialog'
+import { TaskDeleteDialog } from '@/task/task-delete-dialog'
 import { createFileRoute, useNavigate } from '@tanstack/react-router'
 import { useCallback, useState } from 'react'
 
@@ -24,54 +15,34 @@ function BoardTaskDeleteTaskComponent() {
 
     const { boardId, columnId, taskId } = Route.useParams()
 
-    const deleteTask = useBoardsStore((store) => store.deleteTask)
-
     const task = useBoardsStore(selectBoardsTask({ boardId, taskId }))
 
-    const handleToggleDialog = useCallback(() => {
-        setIsOpen(false)
+    const handleCloseDialog = useCallback(
+        (callback?: () => void) => {
+            setIsOpen(false)
 
-        // Wait for the dialog animation to be done before redirecting
-        // so the close is smooth
-        setTimeout(() => {
-            navigate({ to: '/boards/$boardId', params: { boardId } })
-        }, 300)
-    }, [boardId, navigate])
+            // Wait for the dialog animation to be done before redirecting
+            // so the close is smooth
+            setTimeout(() => {
+                navigate({ to: '/boards/$boardId', params: { boardId } })
 
-    const handleDeleteTask = useCallback(() => {
-        setIsOpen(false)
-
-        // Wait for the dialog animation to be done before redirecting
-        // so the close is smooth
-        setTimeout(() => {
-            navigate({ to: '/boards/$boardId', params: { boardId } })
-
-            deleteTask({ boardId, columnId, taskId })
-        }, 300)
-
-        // navigate({ to: '/boards/$boardId', params: { boardId } })
-    }, [boardId, columnId, deleteTask, navigate, taskId])
+                callback?.()
+            }, 300)
+        },
+        [boardId, navigate]
+    )
 
     if (task == null) {
         return null
     }
 
     return (
-        <AlertDialog open={isOpen} onOpenChange={handleToggleDialog}>
-            <AlertDialogContent>
-                <AlertDialogHeader>
-                    <AlertDialogTitle>Delete this task?</AlertDialogTitle>
-                    <AlertDialogDescription>
-                        Are you sure you want to delete the <b>{task?.name} </b>
-                        task and its subtasks? This action cannot be reversed.
-                    </AlertDialogDescription>
-                </AlertDialogHeader>
-
-                <AlertDialogFooter>
-                    <AlertDialogCancel>Cancel</AlertDialogCancel>
-                    <AlertDialogAction onClick={handleDeleteTask}>Continue</AlertDialogAction>
-                </AlertDialogFooter>
-            </AlertDialogContent>
-        </AlertDialog>
+        <TaskDeleteDialog
+            isOpen={isOpen}
+            onClose={handleCloseDialog}
+            boardId={boardId}
+            columnId={columnId}
+            task={task}
+        />
     )
 }
