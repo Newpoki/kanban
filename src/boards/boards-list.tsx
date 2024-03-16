@@ -17,9 +17,8 @@ export const BoardsList = ({ boardId }: BoardsListProps) => {
             </h2>
 
             <ul className="pr-6">
-                {boards.map((board, index) => {
-                    // TODO: check url to know if displayed board
-                    const isSelected = index === 0
+                {boards.map((board) => {
+                    const isSelected = board.id === boardId
 
                     return (
                         <Link to="/boards/$boardId" key={board.id} params={{ boardId: board.id }}>
