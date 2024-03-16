@@ -30,21 +30,28 @@ export const useTaskForm = ({ boardId, taskId, columnId }: UseTaskFormInput) => 
 
     const navigate = useNavigate()
 
-    const defaultValues = useMemo(() => {
-        if (task != null && columnId != null) {
+    const defaultValues = useMemo<TaskDialogFormValues | undefined>(() => {
+        const boardFirstColumn = statusesOptions[0]
+
+        // This should never happen as we can't create a task when having no column yet
+        if (boardFirstColumn == null) {
+            return undefined
+        }
+
+        if (task == null || columnId == null) {
             return {
-                description: task.description,
-                name: task.name,
-                status: columnId,
-                subtasks: task.subtasks,
+                description: '',
+                name: '',
+                status: boardFirstColumn.value,
+                subtasks: [],
             }
         }
 
         return {
-            description: '',
-            name: '',
-            status: statusesOptions[0]?.value,
-            subtasks: [],
+            description: task.description,
+            name: task.name,
+            status: columnId,
+            subtasks: task.subtasks,
         }
     }, [columnId, statusesOptions, task])
 

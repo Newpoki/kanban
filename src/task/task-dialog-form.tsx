@@ -9,10 +9,11 @@ import { useTaskForm } from './use-task-form'
 type TaskDialogFormProps = {
     boardId: Board['id']
     columnId?: BoardColumn['id']
+    isEditing: boolean
     taskId?: BoardColumnTask['id']
 }
 
-export const TaskDialogForm = ({ boardId, columnId, taskId }: TaskDialogFormProps) => {
+export const TaskDialogForm = ({ boardId, columnId, isEditing, taskId }: TaskDialogFormProps) => {
     const { defaultValues, onSubmit, statusesOptions } = useTaskForm({ boardId, columnId, taskId })
 
     const formContext = useForm<TaskDialogFormValues>({
@@ -26,7 +27,7 @@ export const TaskDialogForm = ({ boardId, columnId, taskId }: TaskDialogFormProp
             className="flex flex-col gap-6 overflow-hidden"
             onSubmit={onSubmit}
         >
-            <TaskDialogFormContent statusesOptions={statusesOptions} />
+            <TaskDialogFormContent isEditing={isEditing} statusesOptions={statusesOptions} />
         </ControlledForm>
     )
 }

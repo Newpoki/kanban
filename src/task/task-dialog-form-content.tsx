@@ -9,13 +9,17 @@ import { TaskDialogFormContentSubtasks } from './task-dialog-form-content-subtas
 import { DialogContentInner } from '@/components/ui/dialog'
 
 type TaskDialogFormContentProps = {
+    isEditing: boolean
     statusesOptions: Array<{
         label: BoardColumnTaskSubtask['name']
         value: BoardColumnTaskSubtask['id']
     }>
 }
 
-export const TaskDialogFormContent = ({ statusesOptions }: TaskDialogFormContentProps) => {
+export const TaskDialogFormContent = ({
+    isEditing,
+    statusesOptions,
+}: TaskDialogFormContentProps) => {
     return (
         <>
             <DialogContentInner className="gap-6">
@@ -41,7 +45,7 @@ export const TaskDialogFormContent = ({ statusesOptions }: TaskDialogFormContent
             </DialogContentInner>
 
             <Button size="small" className="mx-6">
-                Create Task
+                {isEditing ? 'Save changes' : 'Create task'}
             </Button>
         </>
     )

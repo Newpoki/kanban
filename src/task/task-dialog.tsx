@@ -11,14 +11,21 @@ type TaskProps = {
 }
 
 export const TaskDialog = ({ boardId, isOpen, onClose, columnId, taskId }: TaskProps) => {
+    const isEditing = taskId != null
+
     return (
         <Dialog open={isOpen} onOpenChange={onClose}>
             <DialogContent className="pb-8">
                 <DialogHeader className="justify-between gap-4">
-                    <DialogTitle>Add new task</DialogTitle>
+                    <DialogTitle>{isEditing ? 'Edit task' : 'Add new task'}</DialogTitle>
                 </DialogHeader>
 
-                <TaskDialogForm boardId={boardId} columnId={columnId} taskId={taskId} />
+                <TaskDialogForm
+                    boardId={boardId}
+                    columnId={columnId}
+                    isEditing={isEditing}
+                    taskId={taskId}
+                />
             </DialogContent>
         </Dialog>
     )
