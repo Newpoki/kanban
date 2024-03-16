@@ -14,6 +14,7 @@ import {
 import { useCallback } from 'react'
 import { useBoardsStore } from '@/boards/boards-store'
 import { boardColumnDroppableDataSchema, boardColumnTaskDraggableDataSchema } from './board-schemas'
+import { BoardEmpty } from './board-empty'
 
 type BoardProps = {
     board: IBoard
@@ -69,20 +70,28 @@ export const Board = ({ board }: BoardProps) => {
 
     return (
         <DndContext onDragEnd={handleDragEnd} sensors={sensors}>
-            <div className="flex w-full flex-1 flex-col overflow-hidden">
+            <div className="flex w-full flex-1 flex-col overflow-hidden bg-grey-100 dark:bg-grey-900">
                 <BoardHeader board={board} />
 
-                {/* Flex 1 1 0 instead of flex 1 to fix issue with scrolling cf https://stackoverflow.com/questions/70198644/overflow-scroll-on-div-with-flex-1-without-specific-height */}
-                <main
-                    className="grid flex-[1_1_0] gap-6 overflow-auto bg-grey-100 px-4 py-6 dark:bg-grey-900"
-                    style={{ gridTemplateColumns: `repeat(${board.columns.length + 1}, 280px)` }}
-                >
-                    {board.columns.map((column) => {
-                        return <BoardColumn key={column.id} boardId={board.id} column={column} />
-                    })}
+                {board.columns.length === 0 ? (
+                    <BoardEmpty />
+                ) : (
+                    // Flex 1 1 0 instead of flex 1 to fix issue with scrolling cf https://stackoverflow.com/questions/70198644/overflow-scroll-on-div-with-flex-1-without-specific-height
+                    <main
+                        className="grid flex-[1_1_0] gap-6 overflow-auto px-4 py-6 "
+                        style={{
+                            gridTemplateColumns: `repeat(${board.columns.length + 1}, 280px)`,
+                        }}
+                    >
+                        {board.columns.map((column) => {
+                            return (
+                                <BoardColumn key={column.id} boardId={board.id} column={column} />
+                            )
+                        })}
 
-                    <BoardColumnPlaceholder />
-                </main>
+                        <BoardColumnPlaceholder />
+                    </main>
+                )}
 
                 <Outlet />
             </div>

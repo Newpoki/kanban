@@ -14,7 +14,7 @@ export const BoardHeader = ({ board }: BoardHeaderProps) => {
 
     return (
         <header
-            className="flex items-center border-b-[1px] border-grey-300 px-4 py-4 dark:border-grey-700 dark:bg-grey-800"
+            className="flex items-center border-b-[1px] border-grey-300 bg-white px-4 py-4 dark:border-grey-700 dark:bg-grey-800"
             ref={ref}
         >
             <Logo className="mr-4 h-5 w-6" />
