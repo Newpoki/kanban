@@ -1,78 +1,29 @@
 import { BoardColumn } from './board-column'
 import { BoardColumnPlaceholder } from './board-column-placeholder'
-import { BoardHeader } from './header/board-header'
 import { Board as IBoard } from '@/boards/boards-schemas'
 import { Outlet } from '@tanstack/react-router'
-import {
-    DndContext,
-    DragEndEvent,
-    MouseSensor,
-    TouchSensor,
-    useSensor,
-    useSensors,
-} from '@dnd-kit/core'
-import { useCallback } from 'react'
-import { useBoardsStore } from '@/boards/boards-store'
-import { boardColumnDroppableDataSchema, boardColumnTaskDraggableDataSchema } from './board-schemas'
+import { DndContext, pointerWithin } from '@dnd-kit/core'
 import { BoardEmpty } from './board-empty'
+import { BoardColumnTaskDragOverlay } from './board-column-task-drag-overlay'
+import { useBoardDnd } from './use-board-dnd'
 
 type BoardProps = {
     board: IBoard
 }
 
 export const Board = ({ board }: BoardProps) => {
-    const changeTaskColumn = useBoardsStore((store) => store.changeTaskColumn)
-
-    const mouseSensor = useSensor(MouseSensor, {
-        activationConstraint: {
-            distance: 10,
-        },
-    })
-
-    const touchSensor = useSensor(TouchSensor, {
-        activationConstraint: {
-            distance: 8,
-        },
-    })
-
-    const sensors = useSensors(mouseSensor, touchSensor)
-
-    const handleDragEnd = useCallback(
-        (event: DragEndEvent) => {
-            console.log('drag', event)
-
-            const parsedTaskDraggableData = boardColumnTaskDraggableDataSchema.safeParse(
-                event.active.data.current
-            )
-
-            const parsedColumnDroppableData = boardColumnDroppableDataSchema.safeParse(
-                event.over?.data.current
-            )
-
-            if (!parsedTaskDraggableData.success || !parsedColumnDroppableData.success) {
-                return
-            }
-
-            // It means user wanted to cancel the drag and drop, so we're not doing any modifications
-            if (parsedTaskDraggableData.data.columnId === parsedColumnDroppableData.data.columnId) {
-                return
-            }
-
-            changeTaskColumn({
-                boardId: board.id,
-                currentColumnId: parsedTaskDraggableData.data.columnId,
-                nextColumnId: parsedColumnDroppableData.data.columnId,
-                taskId: parsedTaskDraggableData.data.taskId,
-            })
-        },
-        [board.id, changeTaskColumn]
-    )
+    const { onDragEnd, onDragOver, sensors } = useBoardDnd({ board })
 
     return (
-        <DndContext onDragEnd={handleDragEnd} sensors={sensors}>
+        <DndContext
+            onDragOver={onDragOver}
+            onDragEnd={onDragEnd}
+            sensors={sensors}
+            // Using pointerWithin seems to fix a weird issue where SortingDnd tools
+            // create infinite renders
+            collisionDetection={pointerWithin}
+        >
             <div className="flex w-full flex-1 flex-col overflow-hidden">
-                {/* <BoardHeader board={board} /> */}
-
                 {board.columns.length === 0 ? (
                     <BoardEmpty boardId={board.id} />
                 ) : (
@@ -95,6 +46,8 @@ export const Board = ({ board }: BoardProps) => {
 
                 <Outlet />
             </div>
+
+            <BoardColumnTaskDragOverlay boardId={board.id} />
         </DndContext>
     )
 }

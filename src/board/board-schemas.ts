@@ -2,11 +2,22 @@ import { z } from 'zod'
 
 export const boardColumnTaskDraggableDataSchema = z.object({
     taskId: z.string(),
-    columnId: z.string(),
+    sortable: z.object({
+        containerId: z.string(),
+        index: z.number(),
+        // Should have a better schema, but there is no need ATM
+        items: z.array(z.object({})),
+    }),
 })
 
 export const boardColumnDroppableDataSchema = z.object({
-    columnId: z.string(),
+    taskId: z.string(),
+    sortable: z.object({
+        containerId: z.string(),
+        index: z.number(),
+        // Should have a better schema, but there is no need ATM
+        items: z.array(z.object({})),
+    }),
 })
 
 export const boardAddOrEditDialogFormValuesColumnSchema = z.object({

@@ -1,9 +1,8 @@
 import { Board, BoardColumn as IBoardColumn } from '@/boards/boards-schemas'
-import { BoardColumnTask } from './board-column-task'
-import { useDndContext } from '@dnd-kit/core'
-import { BoardColumnDroppable } from './board-column-droppable'
-import { useMemo } from 'react'
-import { BoardColumnTaskDraggableData } from './board-schemas'
+import { rectSortingStrategy, SortableContext } from '@dnd-kit/sortable'
+import { Link } from '@tanstack/react-router'
+import { useDroppable } from '@dnd-kit/core'
+import { BoardColumnSortableTask } from './board-column-sortable-task'
 
 type BoardColumnProps = {
     boardId: Board['id']
@@ -11,39 +10,35 @@ type BoardColumnProps = {
 }
 
 export const BoardColumn = ({ boardId, column }: BoardColumnProps) => {
-    const { active } = useDndContext()
-
-    const draggableData = active?.data.current as BoardColumnTaskDraggableData | undefined
-
-    const isDraggingTaskFromAnotherColumn = useMemo(() => {
-        return active != null && draggableData?.columnId !== column.id
-    }, [active, column.id, draggableData?.columnId])
+    const { setNodeRef } = useDroppable({ id: column.id })
 
     return (
-        <section className="flex flex-col">
-            <h2 className="mb-6 flex items-center gap-3">
-                <span className="h-4 w-4 rounded-full" style={{ backgroundColor: column.color }} />
-                <span className="text-h-s uppercase text-grey-500">
-                    {column.name} ({column.tasks.length})
-                </span>
-            </h2>
+        <SortableContext id={column.id} items={column.tasks} strategy={rectSortingStrategy}>
+            <section className="flex flex-col" ref={setNodeRef}>
+                <h2 className="mb-6 flex items-center gap-3">
+                    <span
+                        className="h-4 w-4 rounded-full"
+                        style={{ backgroundColor: column.color }}
+                    />
+                    <span className="text-h-s uppercase text-grey-500">
+                        {column.name} ({column.tasks.length})
+                    </span>
+                </h2>
 
-            {isDraggingTaskFromAnotherColumn ? (
-                <BoardColumnDroppable column={column} />
-            ) : (
-                <ul className="flex w-full flex-col gap-5">
+                <ul className="flex w-full flex-1 flex-col gap-5">
                     {column.tasks.map((task) => {
                         return (
-                            <BoardColumnTask
-                                boardId={boardId}
-                                columnId={column.id}
+                            <Link
+                                to="/boards/$boardId/column/$columnId/task/$taskId"
+                                params={{ boardId, columnId: column.id, taskId: task.id }}
                                 key={task.id}
-                                task={task}
-                            />
+                            >
+                                <BoardColumnSortableTask boardId={boardId} taskId={task.id} />
+                            </Link>
                         )
                     })}
                 </ul>
-            )}
-        </section>
+            </section>
+        </SortableContext>
     )
 }

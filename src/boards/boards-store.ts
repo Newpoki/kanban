@@ -10,6 +10,8 @@ import {
 } from './boards-schemas'
 import { persist } from 'zustand/middleware'
 import omit from 'lodash.omit'
+import { insertAtIndex } from '@/lib/insert-at-index'
+import { arrayMove } from '@dnd-kit/sortable'
 
 const DEFAULT_BOARD: Board = {
     id: uuidv4(),
@@ -237,11 +239,19 @@ type ChangeSubtaskStatusPayload = {
     id: BoardColumnTaskSubtask['id']
 }
 
+type ChangeTaskIndexPayload = {
+    boardId: Board['id']
+    columnId: BoardColumn['id']
+    oldIndex: number
+    newIndex: number
+}
+
 type ChangeTaskColumnPayload = {
     boardId: Board['id']
     currentColumnId: BoardColumn['id']
     nextColumnId: BoardColumn['id']
     taskId: BoardColumnTask['id']
+    taskIndex?: number
 }
 
 type DeleteTaskPayload = {
@@ -277,6 +287,7 @@ type DeleteBoardPayload = {
 export type BoardsStore = {
     data: BoardsMap
     changeSubtaskStatus: (payload: ChangeSubtaskStatusPayload) => void
+    changeTaskIndex: (payload: ChangeTaskIndexPayload) => void
     changeTaskColumn: (payload: ChangeTaskColumnPayload) => void
     deleteTask: (payload: DeleteTaskPayload) => void
     addTask: (payload: AddTaskPayload) => void
@@ -371,7 +382,32 @@ export const useBoardsStore = create(
 
                 set((state) => ({ data: { ...state.data, [boardId]: updatedBoard } }))
             },
-            changeTaskColumn: ({ boardId, currentColumnId, nextColumnId, taskId }) => {
+            changeTaskIndex: ({ boardId, columnId, oldIndex, newIndex }) => {
+                const board = get().data[boardId]
+
+                if (board == null) {
+                    return
+                }
+
+                const updatedBoard: Board = {
+                    ...board,
+                    columns: board.columns.map((column) => {
+                        if (column.id === columnId) {
+                            return {
+                                ...column,
+                                tasks: arrayMove(column.tasks, oldIndex, newIndex),
+                            }
+                        }
+
+                        return column
+                    }),
+                }
+
+                set((state) => ({
+                    data: { ...state.data, [boardId]: updatedBoard },
+                }))
+            },
+            changeTaskColumn: ({ boardId, currentColumnId, nextColumnId, taskId, taskIndex }) => {
                 const board = get().data[boardId]
 
                 if (board == null) {
@@ -397,7 +433,12 @@ export const useBoardsStore = create(
                         }
 
                         if (column.id === nextColumnId) {
-                            return { ...column, tasks: [...column.tasks, task] }
+                            const reOrderedTasks =
+                                taskIndex != null
+                                    ? insertAtIndex(column.tasks, taskIndex, task)
+                                    : [...column.tasks, task]
+
+                            return { ...column, tasks: reOrderedTasks }
                         }
 
                         return column
