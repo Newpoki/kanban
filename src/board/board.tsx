@@ -74,7 +74,7 @@ export const Board = ({ board }: BoardProps) => {
                 <BoardHeader board={board} />
 
                 {board.columns.length === 0 ? (
-                    <BoardEmpty />
+                    <BoardEmpty boardId={board.id} />
                 ) : (
                     // Flex 1 1 0 instead of flex 1 to fix issue with scrolling cf https://stackoverflow.com/questions/70198644/overflow-scroll-on-div-with-flex-1-without-specific-height
                     <main
