@@ -16,7 +16,6 @@ export const BoardsList = ({ boardId }: BoardsListProps) => {
     const navigate = useNavigate()
 
     const handleAddNewBoard = useCallback(() => {
-        // navigate({ to: board != null ? '/boards/$boardId/add' : '/boards/add' })
         board == null
             ? navigate({ to: '/boards/add' })
             : navigate({ to: '/boards/$boardId/add', params: { boardId: board.id } })
@@ -41,11 +40,11 @@ export const BoardsList = ({ boardId }: BoardsListProps) => {
                         </Link>
                     )
                 })}
-            </ul>
 
-            <div onClick={handleAddNewBoard}>
-                <BoardsListItem variant="new" />
-            </div>
+                <button className="w-full" onClick={handleAddNewBoard}>
+                    <BoardsListItem variant="new" />
+                </button>
+            </ul>
         </>
     )
 }
