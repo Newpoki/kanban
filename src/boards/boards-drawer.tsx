@@ -37,11 +37,11 @@ export const BoardsDrawer = () => {
                         <ThemeSelector className="mx-3 mb-4" />
 
                         <button
-                            className="flex items-center gap-[10px] px-6 py-[14px]"
+                            className="flex items-center gap-[10px] px-6 py-[14px] text-grey-500"
                             onClick={handleToggleDrawer}
                         >
-                            <EyeSlash className="h-4 w-[18px]" />
-                            <span className="text-h-m text-grey-500">Hide Sidebar</span>
+                            <EyeSlash className="h-4 w-[18px] " />
+                            <span className="text-h-m ">Hide Sidebar</span>
                         </button>
                     </div>
                 </div>
@@ -49,14 +49,22 @@ export const BoardsDrawer = () => {
 
             <button
                 className={cn(
-                    'fixed bottom-8 left-0 z-40 hidden -translate-x-full rounded-br-3xl rounded-tr-3xl bg-purple-500 p-5 transition-transform md:block',
+                    'group fixed bottom-8 left-0 z-40 hidden h-12 w-14 -translate-x-full items-center rounded-br-3xl  rounded-tr-3xl bg-purple-500 px-5 transition-all hover:w-[260px] hover:bg-purple-500/10 dark:hover:bg-white md:flex md:gap-4',
                     {
                         'translate-x-0': !isExpanded,
                     }
                 )}
                 onClick={handleToggleDrawer}
             >
-                <Eye className="h-[10px] w-4" />
+                <Eye className="h-[10px] w-4 shrink-0 group-hover:hidden" />
+                <EyeSlash className="hidden h-[14px] w-[18px] shrink-0 text-purple-500 group-hover:flex" />
+                <span
+                    className={cn(
+                        'text-purple overflow-hidden whitespace-nowrap text-m transition-all group-hover:text-purple-500'
+                    )}
+                >
+                    Hide sidebar
+                </span>
             </button>
         </>
     )
