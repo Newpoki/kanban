@@ -2,19 +2,17 @@ import { Board, BoardColumn } from '@/boards/boards-schemas'
 import { useBoardsStore } from '@/boards/boards-store'
 import { useCallback, useMemo } from 'react'
 import { v4 as uuidv4 } from 'uuid'
-import { useNavigate } from '@tanstack/react-router'
 import { BoardAddOrEditDialogFormValues } from '../board-schemas'
 
 type UseBoardFormInput = {
     board: Board | undefined
+    onSuccess: (boardId: Board['id']) => void
 }
 
-export const useBoardForm = ({ board }: UseBoardFormInput) => {
+export const useBoardForm = ({ board, onSuccess }: UseBoardFormInput) => {
     const addBoard = useBoardsStore((store) => store.addBoard)
 
     const editBoard = useBoardsStore((store) => store.editBoard)
-
-    const navigate = useNavigate()
 
     const isEditing = board != null
 
@@ -78,9 +76,9 @@ export const useBoardForm = ({ board }: UseBoardFormInput) => {
         (formValues: BoardAddOrEditDialogFormValues) => {
             isEditing ? handleEditBoard(formValues, board) : handleCreateBoard(formValues)
 
-            navigate({ to: '/boards/$boardId', params: { boardId: formValues.id } })
+            onSuccess(formValues.id)
         },
-        [board, handleCreateBoard, handleEditBoard, isEditing, navigate]
+        [board, handleCreateBoard, handleEditBoard, isEditing, onSuccess]
     )
     return useMemo(
         () => ({

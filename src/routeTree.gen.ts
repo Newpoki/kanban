@@ -11,7 +11,9 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as BoardsImport } from './routes/boards'
 import { Route as IndexImport } from './routes/index'
+import { Route as BoardsAddImport } from './routes/boards.add'
 import { Route as BoardsBoardIdImport } from './routes/boards.$boardId'
 import { Route as BoardsBoardIdDeleteImport } from './routes/boards.$boardId.delete'
 import { Route as BoardsBoardIdAddTaskImport } from './routes/boards.$boardId.add-task'
@@ -22,14 +24,24 @@ import { Route as BoardsBoardIdColumnColumnIdTaskTaskIdDeleteImport } from './ro
 
 // Create/Update Routes
 
+const BoardsRoute = BoardsImport.update({
+  path: '/boards',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const IndexRoute = IndexImport.update({
   path: '/',
   getParentRoute: () => rootRoute,
 } as any)
 
+const BoardsAddRoute = BoardsAddImport.update({
+  path: '/add',
+  getParentRoute: () => BoardsRoute,
+} as any)
+
 const BoardsBoardIdRoute = BoardsBoardIdImport.update({
-  path: '/boards/$boardId',
-  getParentRoute: () => rootRoute,
+  path: '/$boardId',
+  getParentRoute: () => BoardsRoute,
 } as any)
 
 const BoardsBoardIdDeleteRoute = BoardsBoardIdDeleteImport.update({
@@ -73,9 +85,17 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
+    '/boards': {
+      preLoaderRoute: typeof BoardsImport
+      parentRoute: typeof rootRoute
+    }
     '/boards/$boardId': {
       preLoaderRoute: typeof BoardsBoardIdImport
-      parentRoute: typeof rootRoute
+      parentRoute: typeof BoardsImport
+    }
+    '/boards/add': {
+      preLoaderRoute: typeof BoardsAddImport
+      parentRoute: typeof BoardsImport
     }
     '/boards/$boardId/add': {
       preLoaderRoute: typeof BoardsBoardIdAddImport
@@ -108,13 +128,16 @@ declare module '@tanstack/react-router' {
 
 export const routeTree = rootRoute.addChildren([
   IndexRoute,
-  BoardsBoardIdRoute.addChildren([
-    BoardsBoardIdAddRoute,
-    BoardsBoardIdAddTaskRoute,
-    BoardsBoardIdDeleteRoute,
-    BoardsBoardIdColumnColumnIdTaskTaskIdDeleteRoute,
-    BoardsBoardIdColumnColumnIdTaskTaskIdEditRoute,
-    BoardsBoardIdColumnColumnIdTaskTaskIdIndexRoute,
+  BoardsRoute.addChildren([
+    BoardsBoardIdRoute.addChildren([
+      BoardsBoardIdAddRoute,
+      BoardsBoardIdAddTaskRoute,
+      BoardsBoardIdDeleteRoute,
+      BoardsBoardIdColumnColumnIdTaskTaskIdDeleteRoute,
+      BoardsBoardIdColumnColumnIdTaskTaskIdEditRoute,
+      BoardsBoardIdColumnColumnIdTaskTaskIdIndexRoute,
+    ]),
+    BoardsAddRoute,
   ]),
 ])
 

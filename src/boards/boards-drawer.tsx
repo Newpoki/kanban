@@ -3,14 +3,12 @@ import { BoardsList } from './boards-list'
 import { ThemeSelector } from '@/theme/theme-selector'
 import { useCallback, useState } from 'react'
 import { cn } from '@/lib/utils'
-import { Board } from './boards-schemas'
+import { useParams } from '@tanstack/react-router'
 
-type BoardsDrawerProps = {
-    boardId: Board['id']
-}
-
-export const BoardsDrawer = ({ boardId }: BoardsDrawerProps) => {
+export const BoardsDrawer = () => {
     const [isExpanded, setIsExpanded] = useState(true)
+
+    const { boardId } = useParams({ from: '/boards/$boardId' })
 
     const handleToggleDrawer = useCallback(() => {
         setIsExpanded((currentIsExpanded) => !currentIsExpanded)

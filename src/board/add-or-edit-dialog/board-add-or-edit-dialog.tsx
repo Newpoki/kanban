@@ -8,9 +8,15 @@ type BoardAddOrEditDialogProps = {
     boardId?: Board['id']
     isOpen: boolean
     onClose: () => void
+    onSuccess: (boardId: Board['id']) => void
 }
 
-export const BoardAddOrEditDialog = ({ boardId, isOpen, onClose }: BoardAddOrEditDialogProps) => {
+export const BoardAddOrEditDialog = ({
+    boardId,
+    isOpen,
+    onClose,
+    onSuccess,
+}: BoardAddOrEditDialogProps) => {
     const board = useBoardsStore(selectBoardById({ boardId }))
 
     const isEditing = board != null
@@ -22,7 +28,11 @@ export const BoardAddOrEditDialog = ({ boardId, isOpen, onClose }: BoardAddOrEdi
                     <DialogTitle>{isEditing ? 'Edit board' : 'Add new board'}</DialogTitle>
                 </DialogHeader>
 
-                <BoardAddOrEditDialogForm board={board} isEditing={isEditing} />
+                <BoardAddOrEditDialogForm
+                    board={board}
+                    isEditing={isEditing}
+                    onSuccess={onSuccess}
+                />
             </DialogContent>
         </Dialog>
     )

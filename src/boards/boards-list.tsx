@@ -1,14 +1,26 @@
+import { useCallback } from 'react'
 import { BoardsListItem } from './boards-list-item'
 import { Board } from './boards-schemas'
+import { selectBoardById } from './boards-selectors'
 import { useBoardsStore } from './boards-store'
-import { Link } from '@tanstack/react-router'
+import { Link, useNavigate } from '@tanstack/react-router'
 
 type BoardsListProps = {
-    boardId: Board['id']
+    boardId?: Board['id']
 }
 
 export const BoardsList = ({ boardId }: BoardsListProps) => {
     const boards = useBoardsStore((store) => Object.values(store.data))
+    const board = useBoardsStore(selectBoardById({ boardId }))
+
+    const navigate = useNavigate()
+
+    const handleAddNewBoard = useCallback(() => {
+        // navigate({ to: board != null ? '/boards/$boardId/add' : '/boards/add' })
+        board == null
+            ? navigate({ to: '/boards/add' })
+            : navigate({ to: '/boards/$boardId/add', params: { boardId: board.id } })
+    }, [board, navigate])
 
     return (
         <>
@@ -31,9 +43,10 @@ export const BoardsList = ({ boardId }: BoardsListProps) => {
                 })}
             </ul>
 
-            <Link to="/boards/$boardId/add" params={{ boardId: boardId }}>
+            <div onClick={handleAddNewBoard}>
                 <BoardsListItem variant="new" />
-            </Link>
+            </div>
+            {/* </Link> */}
         </>
     )
 }

@@ -12,10 +12,15 @@ import { BoardAddOrEditDialogFormContent } from './board-add-or-edit-dialog-form
 type BoardAddOrEditDialogFormProps = {
     board: Board | undefined
     isEditing: boolean
+    onSuccess: (boardId: Board['id']) => void
 }
 
-export const BoardAddOrEditDialogForm = ({ board, isEditing }: BoardAddOrEditDialogFormProps) => {
-    const { defaultValues, onSubmit } = useBoardForm({ board })
+export const BoardAddOrEditDialogForm = ({
+    board,
+    isEditing,
+    onSuccess,
+}: BoardAddOrEditDialogFormProps) => {
+    const { defaultValues, onSubmit } = useBoardForm({ board, onSuccess })
 
     const formContext = useForm<BoardAddOrEditDialogFormValues>({
         defaultValues,
