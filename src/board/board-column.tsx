@@ -1,6 +1,5 @@
 import { Board, BoardColumn as IBoardColumn } from '@/boards/boards-schemas'
 import { rectSortingStrategy, SortableContext } from '@dnd-kit/sortable'
-import { Link } from '@tanstack/react-router'
 import { useDroppable } from '@dnd-kit/core'
 import { BoardColumnSortableTask } from './board-column-sortable-task'
 
@@ -28,13 +27,12 @@ export const BoardColumn = ({ boardId, column }: BoardColumnProps) => {
                 <ul className="flex w-full flex-1 flex-col gap-5">
                     {column.tasks.map((task) => {
                         return (
-                            <Link
-                                to="/boards/$boardId/column/$columnId/task/$taskId"
-                                params={{ boardId, columnId: column.id, taskId: task.id }}
+                            <BoardColumnSortableTask
+                                boardId={boardId}
+                                columnId={column.id}
+                                taskId={task.id}
                                 key={task.id}
-                            >
-                                <BoardColumnSortableTask boardId={boardId} taskId={task.id} />
-                            </Link>
+                            />
                         )
                     })}
                 </ul>

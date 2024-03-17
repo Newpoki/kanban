@@ -40,7 +40,7 @@ export const Board = ({ board }: BoardProps) => {
                             )
                         })}
 
-                        <BoardColumnPlaceholder />
+                        <BoardColumnPlaceholder boardId={board.id} />
                     </main>
                 )}
 
