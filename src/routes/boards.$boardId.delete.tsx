@@ -24,12 +24,12 @@ function BoardDeleteComponent() {
             // Wait for the dialog animation to be done before redirecting
             // so the close is smooth
             setTimeout(() => {
-                navigate({ to: '/boards/$boardId', params: { boardId } })
+                navigate({ to: '/boards' })
 
                 callback?.()
             }, 300)
         },
-        [boardId, navigate]
+        [navigate]
     )
 
     if (board == null) {

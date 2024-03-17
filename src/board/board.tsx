@@ -71,7 +71,7 @@ export const Board = ({ board }: BoardProps) => {
     return (
         <DndContext onDragEnd={handleDragEnd} sensors={sensors}>
             <div className="flex w-full flex-1 flex-col overflow-hidden">
-                <BoardHeader board={board} />
+                {/* <BoardHeader board={board} /> */}
 
                 {board.columns.length === 0 ? (
                     <BoardEmpty boardId={board.id} />

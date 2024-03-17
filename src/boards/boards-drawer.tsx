@@ -18,15 +18,15 @@ export const BoardsDrawer = () => {
         <>
             <div
                 className={cn(
-                    'hidden w-[260px] flex-shrink-0 overflow-hidden border-r-[1px] border-grey-300 pb-8 pt-8 transition-width dark:border-grey-700 dark:bg-grey-800 md:flex md:flex-col',
+                    'hidden flex-shrink-0 overflow-hidden border-r-[1px] border-grey-300 pb-8 pt-8 transition-width dark:border-grey-700 dark:bg-grey-800 md:flex md:w-[260px] md:flex-col lg:w-[300px]',
                     {
-                        'w-0': !isExpanded,
+                        'w-0 md:w-0 lg:w-0': !isExpanded,
                     }
                 )}
             >
                 {/* // Set the width again on the child without transition here so drawer content doesn't visually expanded */}
                 {/* when opening the drawer */}
-                <div className="flex w-[260px] flex-1 flex-col">
+                <div className="flex w-[260px] flex-1 flex-col lg:w-[300px]">
                     <section className="mb-10 flex items-center gap-4 pl-[26px]">
                         <LogoFull className="h-6 w-[125px] fill-black dark:fill-white" />
                     </section>

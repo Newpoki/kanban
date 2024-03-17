@@ -10,12 +10,15 @@ export const BoardsEmpty = () => {
     }, [navigate])
 
     return (
-        <main className="flex flex-1 flex-col items-center justify-center gap-6 px-7 text-center md:px-16">
-            <h2 className="text-h-l text-grey-500">
+        <div className="flex flex-1 flex-col items-center justify-center gap-2 bg-grey-100 px-6 text-center dark:bg-grey-900 dark:text-white">
+            <h1 className="text-h-xl">No boards found</h1>
+            <p className="mb-4 text-h-m">
                 You have no boards yet. Start your journey by creating a new board
-            </h2>
+            </p>
 
-            <Button onClick={handleCreateBoard}>+ Add new board</Button>
-        </main>
+            <Button onClick={handleCreateBoard} size="small">
+                + Add new board
+            </Button>
+        </div>
     )
 }

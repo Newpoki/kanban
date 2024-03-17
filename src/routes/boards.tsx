@@ -1,7 +1,6 @@
+import { Boards } from '@/boards/boards'
 import { BoardsDrawer } from '@/boards/boards-drawer'
-import { BoardsEmpty } from '@/boards/boards-empty'
-import { selectBoardsList } from '@/boards/boards-selectors'
-import { useBoardsStore } from '@/boards/boards-store'
+import { BoardsHeader } from '@/boards/header/boards-header'
 import { Outlet, createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/boards')({
@@ -9,15 +8,13 @@ export const Route = createFileRoute('/boards')({
 })
 
 function BoardsComponent() {
-    const boards = useBoardsStore(selectBoardsList)
-
     return (
         <div className="flex min-h-[100dvh]">
             <BoardsDrawer />
 
-            <div className="flex flex-1 bg-grey-100 dark:bg-grey-900">
-                {boards.length === 0 && <BoardsEmpty />}
-
+            <div className="flex flex-1 flex-col overflow-hidden bg-grey-100 dark:bg-grey-900">
+                <BoardsHeader />
+                <Boards />
                 <Outlet />
             </div>
         </div>

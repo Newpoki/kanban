@@ -46,7 +46,6 @@ export const BoardsList = ({ boardId }: BoardsListProps) => {
             <div onClick={handleAddNewBoard}>
                 <BoardsListItem variant="new" />
             </div>
-            {/* </Link> */}
         </>
     )
 }

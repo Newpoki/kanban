@@ -8,11 +8,11 @@ import {
 import { VerticalDots } from '@/icons'
 import { Link } from '@tanstack/react-router'
 
-type BoardHeaderDropdownProps = {
+type BoardsHeaderDropdownProps = {
     boardId: Board['id']
 }
 
-export const BoardHeaderDropdown = ({ boardId }: BoardHeaderDropdownProps) => {
+export const BoardsHeaderDropdown = ({ boardId }: BoardsHeaderDropdownProps) => {
     return (
         <DropdownMenu
             // Must use modal={false} otherwise the AlertDialog will leave `event-pointer: none`
