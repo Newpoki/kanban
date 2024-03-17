@@ -12,6 +12,7 @@ import { Board, BoardColumn, BoardColumnTask } from '@/boards/boards-schemas'
 import { cn } from '@/lib/utils'
 import { TaskDialogSubtask } from './task-dialog-subtask'
 import { TaskDialogColumnSelect } from './task-dialog-column-select'
+import { TaskDialogNotFound } from './task-dialog-not-found'
 
 type TaskDialogProps = {
     boardId: Board['id']
@@ -29,8 +30,7 @@ export const TaskDialog = ({ boardId, columnId, taskId, isOpen, onClose }: TaskD
     })
 
     if (task == null) {
-        // TODO: handle proper task not found screen
-        return <div>not found</div>
+        return <TaskDialogNotFound isOpen={isOpen} onClose={onClose} />
     }
 
     const doneCount = task.subtasks.filter((subtask) => subtask.status === 'done').length

@@ -60,7 +60,7 @@ export const BoardsDrawer = () => {
                 <EyeSlash className="hidden h-[14px] w-[18px] shrink-0 text-purple-500 group-hover:flex" />
                 <span
                     className={cn(
-                        'text-purple overflow-hidden whitespace-nowrap text-m transition-all group-hover:text-purple-500'
+                        'text-purple overflow-hidden whitespace-nowrap text-h-m transition-all group-hover:text-purple-500'
                     )}
                 >
                     Hide sidebar
