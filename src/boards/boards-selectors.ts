@@ -10,7 +10,7 @@ type SelectBoardByIdInput = {
     boardId: Board['id'] | undefined
 }
 
-export const selectBoardsTask =
+export const selectBoardTask =
     ({ boardId, taskId }: SelectBoardsTaskInput) =>
     (boardsStore: BoardsStore) => {
         return boardsStore.data[boardId]?.columns
@@ -23,3 +23,5 @@ export const selectBoardById =
     (boardsStore: BoardsStore) => {
         return boardId != null ? boardsStore.data[boardId] : undefined
     }
+
+export const selectBoardsList = (boardsStore: BoardsStore) => Object.values(boardsStore.data)

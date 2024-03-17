@@ -1,4 +1,4 @@
-import { selectBoardsTask } from '@/boards/boards-selectors'
+import { selectBoardTask } from '@/boards/boards-selectors'
 import { useBoardsStore } from '@/boards/boards-store'
 import { TaskDeleteDialog } from '@/task/task-delete-dialog'
 import { createFileRoute, useNavigate } from '@tanstack/react-router'
@@ -15,7 +15,7 @@ function BoardTaskDeleteTaskComponent() {
 
     const { boardId, columnId, taskId } = Route.useParams()
 
-    const task = useBoardsStore(selectBoardsTask({ boardId, taskId }))
+    const task = useBoardsStore(selectBoardTask({ boardId, taskId }))
 
     const handleCloseDialog = useCallback(
         (callback?: () => void) => {

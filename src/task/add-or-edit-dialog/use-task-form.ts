@@ -1,5 +1,5 @@
 import { Board, BoardColumn, BoardColumnTask } from '@/boards/boards-schemas'
-import { selectBoardsTask } from '@/boards/boards-selectors'
+import { selectBoardTask } from '@/boards/boards-selectors'
 import { useBoardsStore } from '@/boards/boards-store'
 import { useCallback, useMemo } from 'react'
 import { v4 as uuidv4 } from 'uuid'
@@ -13,7 +13,7 @@ type UseTaskFormInput = {
 }
 
 export const useTaskForm = ({ boardId, taskId, columnId }: UseTaskFormInput) => {
-    const task = useBoardsStore(selectBoardsTask({ boardId, taskId }))
+    const task = useBoardsStore(selectBoardTask({ boardId, taskId }))
 
     const statusesOptions = useBoardsStore((boardsStore) => {
         return (
@@ -56,7 +56,7 @@ export const useTaskForm = ({ boardId, taskId, columnId }: UseTaskFormInput) => 
     }, [columnId, statusesOptions, task])
 
     const handleCreateTask = useCallback(
-        (formValues: TaskDialogFormValues) => {
+        (formValues: TaskAddOrEditDialogFormValues) => {
             const createdTask: BoardColumnTask = {
                 id: uuidv4(),
                 description: formValues.description,
@@ -73,7 +73,7 @@ export const useTaskForm = ({ boardId, taskId, columnId }: UseTaskFormInput) => 
     )
 
     const handleEditTask = useCallback(
-        (formValues: TaskDialogFormValues, task: BoardColumnTask) => {
+        (formValues: TaskAddOrEditDialogFormValues, task: BoardColumnTask) => {
             const editedTask: BoardColumnTask = {
                 ...task,
                 description: formValues.description,
@@ -90,7 +90,7 @@ export const useTaskForm = ({ boardId, taskId, columnId }: UseTaskFormInput) => 
     )
 
     const handleSubmit = useCallback(
-        (formValues: TaskDialogFormValues) => {
+        (formValues: TaskAddOrEditDialogFormValues) => {
             const isEditing = task != null
 
             isEditing ? handleEditTask(formValues, task) : handleCreateTask(formValues)

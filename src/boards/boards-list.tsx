@@ -1,7 +1,7 @@
 import { useCallback } from 'react'
 import { BoardsListItem } from './boards-list-item'
 import { Board } from './boards-schemas'
-import { selectBoardById } from './boards-selectors'
+import { selectBoardById, selectBoardsList } from './boards-selectors'
 import { useBoardsStore } from './boards-store'
 import { Link, useNavigate } from '@tanstack/react-router'
 
@@ -10,7 +10,7 @@ type BoardsListProps = {
 }
 
 export const BoardsList = ({ boardId }: BoardsListProps) => {
-    const boards = useBoardsStore((store) => Object.values(store.data))
+    const boards = useBoardsStore(selectBoardsList)
     const board = useBoardsStore(selectBoardById({ boardId }))
 
     const navigate = useNavigate()

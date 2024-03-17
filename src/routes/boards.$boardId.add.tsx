@@ -1,4 +1,5 @@
 import { BoardAddOrEditDialog } from '@/board/add-or-edit-dialog/board-add-or-edit-dialog'
+import { Board } from '@/boards/boards-schemas'
 import { createFileRoute, useNavigate } from '@tanstack/react-router'
 import { useCallback, useState } from 'react'
 
@@ -23,5 +24,22 @@ function BoardAddComponent() {
         }, 300)
     }, [boardId, navigate])
 
-    return <BoardAddOrEditDialog isOpen={isOpen} onClose={handleCloseDialog} />
+    const handleBoardCreated = useCallback(
+        (createdBoardId: Board['id']) => {
+            setIsOpen(false)
+
+            setTimeout(() => {
+                navigate({ to: '/boards/$boardId', params: { boardId: createdBoardId } })
+            }, 300)
+        },
+        [navigate]
+    )
+
+    return (
+        <BoardAddOrEditDialog
+            isOpen={isOpen}
+            onClose={handleCloseDialog}
+            onSuccess={handleBoardCreated}
+        />
+    )
 }

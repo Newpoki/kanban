@@ -7,7 +7,7 @@ import {
 } from '@/components/ui/dialog'
 import { TaskDialogDropdown } from './task-dialog-dropdown'
 import { useBoardsStore } from '@/boards/boards-store'
-import { selectBoardsTask } from '@/boards/boards-selectors'
+import { selectBoardTask } from '@/boards/boards-selectors'
 import { Board, BoardColumn, BoardColumnTask } from '@/boards/boards-schemas'
 import { cn } from '@/lib/utils'
 import { TaskDialogSubtask } from './task-dialog-subtask'
@@ -22,7 +22,7 @@ type TaskDialogProps = {
 }
 
 export const TaskDialog = ({ boardId, columnId, taskId, isOpen, onClose }: TaskDialogProps) => {
-    const task = useBoardsStore(selectBoardsTask({ boardId, taskId }))
+    const task = useBoardsStore(selectBoardTask({ boardId, taskId }))
 
     const column = useBoardsStore((boardsStore) => {
         return boardsStore.data[boardId]?.columns.find((column) => column.id === columnId)
