@@ -33,8 +33,9 @@ function BoardDeleteComponent() {
     )
 
     if (board == null) {
-        // TODO: Add error screen for no board found
-        return <p>not found</p>
+        // There is nothing to handle as if the board id doesnt match any existing board
+        // there is a dedicated screen for the no board found
+        return null
     }
 
     return <BoardDeleteDialog isOpen={isOpen} onClose={handleCloseDialog} board={board} />
