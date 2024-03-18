@@ -65,7 +65,7 @@ export const TaskDialogColumnSelect = ({ boardId, column, task }: TaskDialogColu
             <h3 className="mb-2 text-m text-grey-500 dark:text-white">Current status</h3>
 
             <Select defaultValue={column.id} onValueChange={handleChangeTaskColumn}>
-                <SelectTrigger className="w-full">
+                <SelectTrigger className="w-full whitespace-normal">
                     <SelectValue />
                 </SelectTrigger>
 

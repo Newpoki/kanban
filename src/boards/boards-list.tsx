@@ -37,7 +37,10 @@ export const BoardsList = ({ boardId }: BoardsListProps) => {
 
             <div className="flex flex-1 flex-col overflow-hidden">
                 <ScrollArea className="mb-1 flex flex-col">
-                    <ul className="flex flex-col gap-1 overflow-hidden overflow-y-auto pr-6">
+                    {/* As the scroll area component insert a display table children
+                        the text ellipsis is not working properly, we have to set a max-width here
+                    */}
+                    <ul className="flex max-w-[350px] flex-col gap-1 overflow-hidden overflow-y-auto pr-6 md:max-w-[260px] lg:max-w-[300px]">
                         {boards.map((board) => {
                             const isSelected = board.id === boardId
 

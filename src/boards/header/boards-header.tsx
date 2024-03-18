@@ -19,7 +19,7 @@ export const BoardsHeader = () => {
             className="flex h-16 items-center bg-white pr-4 dark:bg-grey-800 md:h-20 lg:h-24"
             ref={ref}
         >
-            <section className="drawer-width board-border-color flex h-full items-center pl-6 md:border-r-[1px]">
+            <section className="drawer-width board-border-color flex h-full flex-shrink-0 items-center pl-6 md:border-r-[1px]">
                 <Logo className="mr-4 h-5 w-6 md:hidden" />
                 <LogoFull className="hidden h-6 w-[125px] fill-black dark:fill-white md:block" />
             </section>

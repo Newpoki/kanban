@@ -36,7 +36,7 @@ export const BoardsHeaderPopover = ({ board, headerRef }: BoardsHeaderPopoverPro
                 <PopoverTrigger className="mr-3 flex max-w-[250px] items-center gap-3 md:hidden">
                     <h1 className="truncate text-h-l dark:text-white">{displayedBoardName}</h1>
 
-                    <Chevron className="h-2 w-3" />
+                    <Chevron className="h-2 w-3 flex-shrink-0" />
                 </PopoverTrigger>
 
                 <h1 className="mr-4 hidden truncate pl-6 text-h-l dark:text-white md:block lg:text-h-xl">

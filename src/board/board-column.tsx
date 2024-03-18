@@ -14,14 +14,17 @@ export const BoardColumn = ({ boardId, column }: BoardColumnProps) => {
     return (
         <SortableContext id={column.id} items={column.tasks} strategy={rectSortingStrategy}>
             <section className="flex flex-col" ref={setNodeRef}>
-                <h2 className="mb-6 flex items-center gap-3">
+                <h2 className="mb-6 flex items-center gap-3 text-h-s uppercase text-grey-500">
                     <span
-                        className="h-4 w-4 rounded-full"
+                        className="h-4 w-4 flex-shrink-0 rounded-full"
                         style={{ backgroundColor: column.color }}
                     />
-                    <span className="text-h-s uppercase text-grey-500">
-                        {column.name} ({column.tasks.length})
-                    </span>
+
+                    <div className="flex items-center gap-1 overflow-hidden">
+                        <span className="truncate">{column.name}</span>
+
+                        <span> ({column.tasks.length})</span>
+                    </div>
                 </h2>
 
                 <ul className="flex w-full flex-1 flex-col gap-5">
