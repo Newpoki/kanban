@@ -3,6 +3,7 @@ import { useBoardsStore } from '@/boards/boards-store'
 import { useCallback, useMemo } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import { BoardAddOrEditDialogFormValues } from '../board-schemas'
+import { toast } from 'sonner'
 
 type UseBoardFormInput = {
     board: Board | undefined
@@ -52,6 +53,8 @@ export const useBoardForm = ({ board, onSuccess }: UseBoardFormInput) => {
             }
 
             addBoard({ board: createdBoard })
+
+            toast.info('Board has been created')
         },
         [addBoard]
     )
@@ -75,6 +78,8 @@ export const useBoardForm = ({ board, onSuccess }: UseBoardFormInput) => {
             }
 
             editBoard({ board: updatedBoard })
+
+            toast.info('Board has been edited')
         },
         [editBoard]
     )

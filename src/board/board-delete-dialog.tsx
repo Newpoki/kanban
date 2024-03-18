@@ -11,6 +11,7 @@ import {
     AlertDialogTitle,
 } from '@/components/ui/alert-dialog'
 import { useCallback } from 'react'
+import { toast } from 'sonner'
 
 type BoardDeleteDialogProps = {
     board: Board
@@ -28,6 +29,8 @@ export const BoardDeleteDialog = ({ board, isOpen, onClose }: BoardDeleteDialogP
     const handleDeleteTask = useCallback(() => {
         onClose(() => {
             deleteTask({ boardId: board.id })
+
+            toast.info('Board has been deleted')
         })
     }, [board.id, deleteTask, onClose])
 

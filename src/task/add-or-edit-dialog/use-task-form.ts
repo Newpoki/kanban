@@ -5,6 +5,7 @@ import { useCallback, useMemo } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import { useNavigate } from '@tanstack/react-router'
 import { TaskAddOrEditDialogFormValues } from '../task-schemas'
+import { toast } from 'sonner'
 
 type UseTaskFormInput = {
     boardId: Board['id']
@@ -68,6 +69,8 @@ export const useTaskForm = ({ boardId, taskId, columnId }: UseTaskFormInput) => 
             }
 
             addTask({ boardId, columnId: formValues.status, task: createdTask })
+
+            toast.info('Task has been created')
         },
         [addTask, boardId]
     )
@@ -85,6 +88,8 @@ export const useTaskForm = ({ boardId, taskId, columnId }: UseTaskFormInput) => 
             }
 
             editTask({ boardId, columnId: formValues.status, task: editedTask })
+
+            toast.info('Task has been edited')
         },
         [boardId, editTask]
     )

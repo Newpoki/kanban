@@ -1,6 +1,7 @@
 import { Boards } from '@/boards/boards'
 import { BoardsDrawer } from '@/boards/boards-drawer'
 import { BoardsHeader } from '@/boards/header/boards-header'
+import { Toaster } from '@/components/ui/sonner'
 import { Outlet, createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/boards')({
@@ -19,6 +20,8 @@ function BoardsComponent() {
                     <Outlet />
                 </div>
             </div>
+
+            <Toaster richColors />
         </div>
     )
 }

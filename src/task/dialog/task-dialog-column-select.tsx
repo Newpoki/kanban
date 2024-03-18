@@ -9,6 +9,7 @@ import {
 } from '@/components/ui/select'
 import { useNavigate } from '@tanstack/react-router'
 import { useCallback } from 'react'
+import { toast } from 'sonner'
 
 type TaskDialogColumnSelectProps = {
     boardId: Board['id']
@@ -43,6 +44,8 @@ export const TaskDialogColumnSelect = ({ boardId, column, task }: TaskDialogColu
                 nextColumnId,
                 taskId: task.id,
             })
+
+            toast.info("Task column's has been updated")
 
             // Also updating the url so if user refresh, the subtask is still displayed
             navigate({
