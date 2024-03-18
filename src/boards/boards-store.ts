@@ -15,147 +15,50 @@ import { arrayMove } from '@dnd-kit/sortable'
 
 const DEFAULT_BOARD: Board = {
     id: uuidv4(),
-    name: 'Default board',
+    name: 'My first board',
     columns: [
         {
             color: '#49C4E5',
             id: uuidv4(),
-            name: 'todo',
+            name: 'Todo',
             tasks: [
                 {
                     id: uuidv4(),
-                    name: 'Build UI for onboarding flow',
-                    description:
-                        "We know what we're planning to build for version one. Now we need to finalise the first pricing model we'll use. Keep iterating the subtasks until we have a coherent proposition.",
+                    name: 'Create a new column',
+                    description: 'Having meaning full columns helps maintaing a good workflow',
+                    subtasks: [],
+                },
+                {
+                    id: uuidv4(),
+                    name: 'Create a new task',
+                    description: 'Scheduling a new task is always exciting !',
                     subtasks: [
                         {
                             id: uuidv4(),
-                            name: 'The first subtask',
-                            status: 'pending',
-                        },
-                        {
-                            id: uuidv4(),
-                            name: 'The second subtask',
+                            name: 'Thinking about a good name and description',
                             status: 'done',
                         },
                         {
                             id: uuidv4(),
-                            name: 'The third subtask',
+                            name: 'Write down the task',
                             status: 'pending',
                         },
                     ],
                 },
                 {
                     id: uuidv4(),
-                    name: 'Build UI for search',
+                    name: 'Try the drag and drop feature',
                     description:
-                        "We know what we're planning to build for version one. Now we need to finalise the first pricing model we'll use. Keep iterating the subtasks until we have a coherent proposition.",
+                        'You can easily drag a task from a column to another, or even drag a task inside its own column to change the tasks order. Try it yourself',
                     subtasks: [
                         {
                             id: uuidv4(),
-                            name: 'The first subtask',
+                            name: 'Drag a task to another column',
                             status: 'pending',
                         },
                         {
                             id: uuidv4(),
-                            name: 'The second subtask',
-                            status: 'done',
-                        },
-                        {
-                            id: uuidv4(),
-                            name: 'The third subtask',
-                            status: 'pending',
-                        },
-                    ],
-                },
-                {
-                    id: uuidv4(),
-                    name: 'Build UI for onboarding flow',
-                    description:
-                        "We know what we're planning to build for version one. Now we need to finalise the first pricing model we'll use. Keep iterating the subtasks until we have a coherent proposition.",
-                    subtasks: [
-                        {
-                            id: uuidv4(),
-                            name: 'The first subtask',
-                            status: 'pending',
-                        },
-                        {
-                            id: uuidv4(),
-                            name: 'The second subtask',
-                            status: 'done',
-                        },
-                        {
-                            id: uuidv4(),
-                            name: 'The third subtask',
-                            status: 'pending',
-                        },
-                    ],
-                },
-                {
-                    id: uuidv4(),
-                    name: 'Build UI for search',
-                    description:
-                        "We know what we're planning to build for version one. Now we need to finalise the first pricing model we'll use. Keep iterating the subtasks until we have a coherent proposition.",
-                    subtasks: [
-                        {
-                            id: uuidv4(),
-                            name: 'The first subtask',
-                            status: 'pending',
-                        },
-                        {
-                            id: uuidv4(),
-                            name: 'The second subtask',
-                            status: 'done',
-                        },
-                        {
-                            id: uuidv4(),
-                            name: 'The third subtask',
-                            status: 'pending',
-                        },
-                    ],
-                },
-                {
-                    id: uuidv4(),
-                    name: 'Build UI for onboarding flow',
-                    description:
-                        "We know what we're planning to build for version one. Now we need to finalise the first pricing model we'll use. Keep iterating the subtasks until we have a coherent proposition.",
-                    subtasks: [
-                        {
-                            id: uuidv4(),
-                            name: 'The first subtask',
-                            status: 'pending',
-                        },
-                        {
-                            id: uuidv4(),
-                            name: 'The second subtask',
-                            status: 'done',
-                        },
-                        {
-                            id: uuidv4(),
-                            name: 'The third subtask',
-                            status: 'pending',
-                        },
-                    ],
-                },
-                {
-                    id: uuidv4(),
-                    name: 'Build UI for search',
-                    description:
-                        "We know what we're planning to build for version one. Now we need to finalise the first pricing model we'll use. Keep iterating the subtasks until we have a coherent proposition.",
-                    subtasks: [
-                        {
-                            id: uuidv4(),
-                            name: 'The first subtask',
-                            status: 'pending',
-                        },
-                        {
-                            id: uuidv4(),
-                            name: 'The second subtask',
-                            status: 'done',
-                        },
-                        {
-                            id: uuidv4(),
-                            name: 'The third subtask',
+                            name: 'Drag a task inside the same column to re order tasks',
                             status: 'pending',
                         },
                     ],
@@ -163,55 +66,28 @@ const DEFAULT_BOARD: Board = {
             ],
         },
         {
-            color: '#8471F2',
+            color: '#654321',
             id: uuidv4(),
-            name: 'doing',
+            name: 'Doing',
             tasks: [
                 {
                     id: uuidv4(),
-                    name: 'DOING UI for onboarding flow',
-                    description:
-                        "We know what we're planning to build for version one. Now we need to finalise the first pricing model we'll use. Keep iterating the subtasks until we have a coherent proposition.",
-                    subtasks: [
-                        {
-                            id: uuidv4(),
-                            name: 'The first subtask',
-                            status: 'pending',
-                        },
-                        {
-                            id: uuidv4(),
-                            name: 'The second subtask',
-                            status: 'done',
-                        },
-                        {
-                            id: uuidv4(),
-                            name: 'The third subtask',
-                            status: 'pending',
-                        },
-                    ],
+                    name: 'Discovers main features',
+                    subtasks: [],
+                    description: '',
                 },
+            ],
+        },
+        {
+            color: '#8471F2',
+            id: uuidv4(),
+            name: 'Done',
+            tasks: [
                 {
                     id: uuidv4(),
-                    name: 'DOING UI for search',
-                    description:
-                        "We know what we're planning to build for version one. Now we need to finalise the first pricing model we'll use. Keep iterating the subtasks until we have a coherent proposition.",
-                    subtasks: [
-                        {
-                            id: uuidv4(),
-                            name: 'The first subtask',
-                            status: 'pending',
-                        },
-                        {
-                            id: uuidv4(),
-                            name: 'The second subtask',
-                            status: 'done',
-                        },
-                        {
-                            id: uuidv4(),
-                            name: 'The third subtask',
-                            status: 'pending',
-                        },
-                    ],
+                    name: 'Create my first board !',
+                    description: "Congratulations ! This is your first board. Let's fill it",
+                    subtasks: [],
                 },
             ],
         },
