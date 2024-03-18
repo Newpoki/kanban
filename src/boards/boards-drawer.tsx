@@ -1,18 +1,21 @@
 import { Eye, EyeSlash } from '@/icons'
 import { BoardsList } from './boards-list'
 import { ThemeSelector } from '@/theme/theme-selector'
-import { useCallback, useState } from 'react'
+import { useCallback } from 'react'
 import { cn } from '@/lib/utils'
 import { useParams } from '@tanstack/react-router'
 
-export const BoardsDrawer = () => {
-    const [isExpanded, setIsExpanded] = useState(true)
+type BoardsDrawerProps = {
+    isExpanded: boolean
+    setIsExpanded: React.Dispatch<React.SetStateAction<boolean>>
+}
 
+export const BoardsDrawer = ({ isExpanded, setIsExpanded }: BoardsDrawerProps) => {
     const { boardId } = useParams({ from: '/boards/$boardId' })
 
     const handleToggleDrawer = useCallback(() => {
         setIsExpanded((currentIsExpanded) => !currentIsExpanded)
-    }, [])
+    }, [setIsExpanded])
 
     return (
         <>
