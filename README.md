@@ -14,7 +14,6 @@ This is a solution to the [Kanban task management web app challenge on Frontend 
     -   [Continued development](#continued-development)
     -   [Useful resources](#useful-resources)
 -   [Author](#author)
--   [Acknowledgments](#acknowledgments)
 
 ## Overview
 
@@ -52,6 +51,7 @@ Users should be able to:
 -   [Tailwind](https://tailwindcss.com/) - CSS utilities
 -   [Zustand](https://tailwindcss.com/) - State manager
 -   [Tanstack Router](https://tanstack.com/router/latest) - React router
+-   [React hook form](https://react-hook-form.com/) - React hook form
 
 **Note: These are just examples. Delete this note and replace the list above with your own choices**
 
