@@ -1,6 +1,5 @@
 import { ControlledInput, ControlledInputProps } from '@/components/form/controlled-input'
 import { Close } from '@/icons'
-import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { useCallback } from 'react'
 import { useFormContext } from 'react-hook-form'
@@ -9,7 +8,7 @@ import { getFieldKey } from '@/lib/get-field-key'
 
 type BoardAddOrEditDialogFormContentColumnFieldProps = Omit<
     ControlledInputProps<BoardAddOrEditDialogFormValues>,
-    'name'
+    'name' | 'placeholder'
 > & {
     index: number
     onDelete: (index: number) => void
@@ -36,6 +35,7 @@ export const BoardAddOrEditDialogFormContentColumnField = ({
 
             <ControlledInput
                 {...others}
+                placeholder="e.g. Make coffee"
                 name={getFieldKey<BoardAddOrEditDialogFormValues>(`columns.${index}.name`)}
             />
             <Button size="icon" variant="transparent" type="button" onClick={handleDelete}>

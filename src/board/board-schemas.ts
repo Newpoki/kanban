@@ -32,6 +32,19 @@ export const boardAddOrEditDialogFormValuesSchema = z.object({
     columns: z.array(boardAddOrEditDialogFormValuesColumnSchema),
 })
 
+export const boardAddOrEeditDialogFormContentColumnDraggableDataSchema = z.object({
+    columnIndex: z.number(),
+    sortable: z.object({
+        containerId: z.string(),
+        index: z.number(),
+        // Should have a better schema, but there is no need ATM
+        items: z.array(z.object({})),
+    }),
+})
+
 export type BoardColumnTaskDraggableData = z.infer<typeof boardColumnTaskDraggableDataSchema>
 export type BoardColumnDroppableData = z.infer<typeof boardColumnDroppableDataSchema>
 export type BoardAddOrEditDialogFormValues = z.infer<typeof boardAddOrEditDialogFormValuesSchema>
+export type BoardAddOrEditDialogFormContentColumnDraggableData = z.infer<
+    typeof boardAddOrEeditDialogFormContentColumnDraggableDataSchema
+>
