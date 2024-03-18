@@ -34,7 +34,7 @@ export const TaskDialogSubtask = ({
     }, [boardId, changeSubtaskStatus, columnId, subtask.id, taskId])
 
     return (
-        <label className="flex cursor-pointer items-center gap-4 rounded-[4px] bg-grey-100 p-3 text-m hover:bg-purple-500/25 dark:bg-grey-900 dark:text-white hover:dark:bg-purple-500/25">
+        <label className="flex cursor-pointer items-center gap-4 rounded-[4px] bg-grey-100 p-3 text-m transition-colors hover:bg-purple-500/25 dark:bg-grey-900 dark:text-white hover:dark:bg-purple-500/25">
             <Checkbox
                 key={subtask.id}
                 checked={subtask.status === 'done'}
