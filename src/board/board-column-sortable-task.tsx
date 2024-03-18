@@ -23,11 +23,12 @@ export const BoardColumnSortableTask = ({
         },
     })
 
-    const style = useMemo(
+    const style = useMemo<React.CSSProperties>(
         () => ({
             transform: CSS.Transform.toString(transform),
             transition,
             opacity: isDragging ? 0.5 : 1,
+            cursor: 'grab',
         }),
         [isDragging, transform, transition]
     )

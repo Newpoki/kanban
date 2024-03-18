@@ -13,7 +13,7 @@ export const BoardColumnTaskDragOverlay = ({ boardId }: BoardColumnTaskDragOverl
     const activeData = active?.data.current as BoardColumnTaskDraggableData
 
     return (
-        <DragOverlay>
+        <DragOverlay style={{ cursor: 'grabbing' }}>
             {activeData?.taskId != null ? (
                 <BoardColumnTask boardId={boardId} taskId={activeData.taskId} />
             ) : null}
