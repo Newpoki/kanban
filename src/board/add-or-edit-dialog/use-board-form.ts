@@ -17,22 +17,29 @@ export const useBoardForm = ({ board, onSuccess }: UseBoardFormInput) => {
     const isEditing = board != null
 
     const defaultValues = useMemo<BoardAddOrEditDialogFormValues>(() => {
+        // This column will be inserted if creating a board or editing a board without value
+        // to guide the user in creating at least one column
+        const emptyColumn = { color: '#123456', id: uuidv4(), name: '' }
+
         if (board == null) {
             return {
                 id: uuidv4(),
                 name: '',
-                columns: [],
+                columns: [emptyColumn],
             }
         }
 
         return {
             id: board.id,
             name: board.name,
-            columns: board.columns.map((column) => ({
-                color: column.color,
-                id: column.id,
-                name: column.name,
-            })),
+            columns:
+                board.columns.length === 0
+                    ? [emptyColumn]
+                    : board.columns.map((column) => ({
+                          color: column.color,
+                          id: column.id,
+                          name: column.name,
+                      })),
         }
     }, [board])
 

@@ -10,12 +10,14 @@ export const Route = createFileRoute('/boards')({
 function BoardsComponent() {
     return (
         <div className="flex min-h-[100dvh]">
-            <BoardsDrawer />
-
             <div className="flex flex-1 flex-col overflow-hidden bg-grey-100 dark:bg-grey-900">
                 <BoardsHeader />
-                <Boards />
-                <Outlet />
+
+                <div className="flex flex-1">
+                    <BoardsDrawer />
+                    <Boards />
+                    <Outlet />
+                </div>
             </div>
         </div>
     )

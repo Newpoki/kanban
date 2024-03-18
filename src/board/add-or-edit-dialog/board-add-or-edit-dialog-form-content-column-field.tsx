@@ -29,7 +29,11 @@ export const BoardAddOrEditDialogFormContentColumnField = ({
 
     return (
         <div className="flex w-full items-center gap-2">
-            <input type="color" {...register(`columns.${index}.color`)} />
+            <input
+                type="color"
+                {...register(`columns.${index}.color`)}
+                className="h-8 w-12 flex-shrink-0 bg-transparent"
+            />
 
             <ControlledInput
                 {...others}

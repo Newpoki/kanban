@@ -39,16 +39,16 @@ export const BoardsHeaderPopover = ({ board, headerRef }: BoardsHeaderPopoverPro
                     <Chevron className="h-2 w-3" />
                 </PopoverTrigger>
 
-                <h1 className="mr-4 hidden truncate text-h-l dark:text-white md:block lg:text-h-xl">
+                <h1 className="mr-4 hidden truncate pl-6 text-h-l dark:text-white md:block lg:text-h-xl">
                     {displayedBoardName}
                 </h1>
 
                 <PopoverAnchor virtualRef={headerRef} />
 
-                <PopoverContent className="flex flex-col p-0" sideOffset={10}>
+                <PopoverContent className="flex max-h-[80dvh] flex-col gap-5 p-0" sideOffset={10}>
                     <BoardsList boardId={board?.id} />
 
-                    <ThemeSelector className="m-4" />
+                    <ThemeSelector className="mx-4 -mt-2 mb-4" />
                 </PopoverContent>
             </Popover>
         </>

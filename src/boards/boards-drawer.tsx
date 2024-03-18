@@ -1,4 +1,4 @@
-import { Eye, EyeSlash, LogoFull } from '@/icons'
+import { Eye, EyeSlash } from '@/icons'
 import { BoardsList } from './boards-list'
 import { ThemeSelector } from '@/theme/theme-selector'
 import { useCallback, useState } from 'react'
@@ -18,31 +18,28 @@ export const BoardsDrawer = () => {
         <>
             <div
                 className={cn(
-                    'hidden flex-shrink-0 overflow-hidden border-r-[1px] border-grey-300 pb-8 pt-8 transition-width dark:border-grey-700 dark:bg-grey-800 md:flex md:w-[260px] md:flex-col lg:w-[300px]',
+                    'drawer-width board-border-color hidden flex-shrink-0 overflow-hidden border-r-[1px] bg-white pb-8  transition-width dark:bg-grey-800 md:flex md:h-[calc(100dvh_-_80px)] md:flex-col lg:h-[calc(100dvh_-_96px)]',
                     {
                         'w-0 md:w-0 lg:w-0': !isExpanded,
                     }
                 )}
             >
-                {/* // Set the width again on the child without transition here so drawer content doesn't visually expanded */}
+                {/* Set the width again on the child without transition here so drawer content doesn't visually expanded */}
                 {/* when opening the drawer */}
-                <div className="flex w-[260px] flex-1 flex-col lg:w-[300px]">
-                    <section className="mb-10 flex items-center gap-4 pl-[26px]">
-                        <LogoFull className="h-6 w-[125px] fill-black dark:fill-white" />
-                    </section>
-
+                <div className="flex w-[260px] flex-1 flex-col gap-5 overflow-hidden lg:w-[300px]">
                     <BoardsList boardId={boardId} />
 
                     <div className="mt-auto">
-                        <ThemeSelector className="mx-3 mb-4" />
+                        <ThemeSelector className="mx-3 mb-2 lg:mx-6" />
 
-                        <button
-                            className="flex items-center gap-[10px] px-6 py-[14px] text-grey-500"
+                        <div
+                            className="mr-3 flex items-center gap-[10px] rounded-br-3xl rounded-tr-3xl px-6  py-[14px] text-grey-500 transition-colors hover:bg-purple-500/10 hover:text-purple-500  dark:hover:bg-white lg:mr-6"
                             onClick={handleToggleDrawer}
+                            role="button"
                         >
-                            <EyeSlash className="h-4 w-[18px] " />
-                            <span className="text-h-m ">Hide Sidebar</span>
-                        </button>
+                            <EyeSlash className="h-4 w-[18px]" />
+                            <span className="text-h-m">Hide Sidebar</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -63,7 +60,7 @@ export const BoardsDrawer = () => {
                         'text-purple overflow-hidden whitespace-nowrap text-h-m transition-all group-hover:text-purple-500'
                     )}
                 >
-                    Hide sidebar
+                    Show sidebar
                 </span>
             </button>
         </>

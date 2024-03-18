@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button'
-import { Logo, Plus } from '@/icons'
+import { Logo, Plus, LogoFull } from '@/icons'
 import { BoardsHeaderPopover } from './boards-header-popover'
 import { useRef } from 'react'
 import { Link, useParams } from '@tanstack/react-router'
@@ -16,10 +16,13 @@ export const BoardsHeader = () => {
 
     return (
         <header
-            className="flex h-16 items-center border-b-[1px] border-grey-300 bg-white px-4 py-4 dark:border-grey-700 dark:bg-grey-800 md:h-20 lg:h-24"
+            className="flex h-16 items-center bg-white pr-4 dark:bg-grey-800 md:h-20 lg:h-24"
             ref={ref}
         >
-            <Logo className="mr-4 h-5 w-6 md:hidden" />
+            <section className="drawer-width board-border-color flex h-full items-center pl-6 md:border-r-[1px]">
+                <Logo className="mr-4 h-5 w-6 md:hidden" />
+                <LogoFull className="hidden h-6 w-[125px] fill-black dark:fill-white md:block" />
+            </section>
 
             <BoardsHeaderPopover board={board} headerRef={ref} />
 

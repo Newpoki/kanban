@@ -29,7 +29,7 @@ export const Board = ({ board }: BoardProps) => {
                 ) : (
                     // Flex 1 1 0 instead of flex 1 to fix issue with scrolling cf https://stackoverflow.com/questions/70198644/overflow-scroll-on-div-with-flex-1-without-specific-height
                     <main
-                        className="grid flex-[1_1_0] gap-6 overflow-auto px-4 py-6 "
+                        className="board-border-color grid flex-[1_1_0] gap-6 overflow-auto border-t-[1px] p-6"
                         style={{
                             gridTemplateColumns: `repeat(${board.columns.length + 1}, 280px)`,
                         }}

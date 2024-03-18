@@ -22,7 +22,7 @@ export const BoardsListItem = (props: BoardsListItemProps) => {
     }, [props])
 
     return (
-        <button className="w-full overflow-hidden rounded-br-3xl rounded-tr-3xl">
+        <button className="w-full flex-shrink-0 overflow-hidden rounded-br-3xl rounded-tr-3xl">
             <li
                 className={cn(
                     'flex w-full items-center gap-3 px-6 py-[15px] text-grey-500 transition-colors hover:bg-purple-500/10 hover:text-purple-500 dark:hover:bg-white',

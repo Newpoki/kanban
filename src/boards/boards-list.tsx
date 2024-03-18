@@ -4,6 +4,7 @@ import { Board } from './boards-schemas'
 import { selectBoardById, selectBoardsList } from './boards-selectors'
 import { useBoardsStore } from './boards-store'
 import { useNavigate } from '@tanstack/react-router'
+import { ScrollArea } from '@/components/ui/scroll-area'
 
 type BoardsListProps = {
     boardId?: Board['id']
@@ -30,26 +31,32 @@ export const BoardsList = ({ boardId }: BoardsListProps) => {
 
     return (
         <>
-            <h2 className="pb-5 pl-6 pt-4 text-h-s uppercase text-grey-500">
+            <h2 className="pl-6 pt-4 text-h-s uppercase text-grey-500">
                 All boards ({boards.length})
             </h2>
 
-            <ul className="flex flex-col gap-1 pr-6">
-                {boards.map((board) => {
-                    const isSelected = board.id === boardId
+            <div className="flex flex-1 flex-col overflow-hidden">
+                <ScrollArea className="mb-1 flex flex-col">
+                    <ul className="flex flex-col gap-1 overflow-hidden overflow-y-auto pr-6">
+                        {boards.map((board) => {
+                            const isSelected = board.id === boardId
 
-                    return (
-                        <BoardsListItem
-                            board={board}
-                            key={board.id}
-                            onClick={handleGoToBoard}
-                            variant={isSelected ? 'selected' : undefined}
-                        />
-                    )
-                })}
+                            return (
+                                <BoardsListItem
+                                    board={board}
+                                    key={board.id}
+                                    onClick={handleGoToBoard}
+                                    variant={isSelected ? 'selected' : undefined}
+                                />
+                            )
+                        })}
+                    </ul>
+                </ScrollArea>
 
-                <BoardsListItem variant="new" onClick={handleAddNewBoard} />
-            </ul>
+                <div className="mr-6">
+                    <BoardsListItem variant="new" onClick={handleAddNewBoard} />
+                </div>
+            </div>
         </>
     )
 }
