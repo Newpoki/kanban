@@ -10,6 +10,7 @@ import {
     AlertDialogHeader,
     AlertDialogTitle,
 } from '@/components/ui/alert-dialog'
+import { useNavigate } from '@tanstack/react-router'
 import { useCallback } from 'react'
 import { toast } from 'sonner'
 
@@ -22,9 +23,13 @@ type BoardDeleteDialogProps = {
 export const BoardDeleteDialog = ({ board, isOpen, onClose }: BoardDeleteDialogProps) => {
     const deleteTask = useBoardsStore((store) => store.deleteBoard)
 
+    const navigate = useNavigate()
+
     const handleClose = useCallback(() => {
-        onClose()
-    }, [onClose])
+        onClose(() => {
+            navigate({ to: '/boards/$boardId', params: { boardId: board.id } })
+        })
+    }, [board.id, navigate, onClose])
 
     const handleDeleteTask = useCallback(() => {
         onClose(() => {
