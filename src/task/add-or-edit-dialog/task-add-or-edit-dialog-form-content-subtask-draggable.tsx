@@ -35,14 +35,18 @@ export const TaskAddOrEditDialogFormContentSubtaskDraggable = ({
             transform: CSS.Transform.toString(transform),
             transition,
             opacity: isDragging ? 0.5 : 1,
-            cursor: 'grab',
         }),
         [isDragging, transform, transition]
     )
 
     return (
         <li ref={setNodeRef} style={style} className="flex items-center ">
-            <button {...attributes} {...listeners} type="button">
+            <button
+                {...attributes}
+                {...listeners}
+                type="button"
+                style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
+            >
                 <DragHandle className="h-6 w-6 text-grey-500" />
             </button>
 
