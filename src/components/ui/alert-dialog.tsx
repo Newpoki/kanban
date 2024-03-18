@@ -77,11 +77,10 @@ const AlertDialogDescription = React.forwardRef<
 >(({ className, children, ...props }, ref) => (
     <AlertDialogPrimitive.Description
         ref={ref}
-        className={cn('text-left text-l ', className)}
+        className={cn('text-left text-l text-grey-500', className)}
         {...props}
     >
-        {/* As `twMerge` used inside `cn` has some issues, we have to create intermediary component */}
-        <span className="text-grey-500">{children}</span>
+        {children}
     </AlertDialogPrimitive.Description>
 ))
 AlertDialogDescription.displayName = AlertDialogPrimitive.Description.displayName
