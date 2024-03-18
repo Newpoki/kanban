@@ -17,14 +17,11 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                     {
                         'border-red-500 has-[:focus-visible]:ring-red-500':
                             error != null && error.length > 0,
-                    }
+                    },
+                    className
                 )}
             >
-                <input
-                    {...props}
-                    className={cn('w-full bg-transparent outline-none', className)}
-                    ref={ref}
-                />
+                <input {...props} className="w-full bg-transparent outline-none" ref={ref} />
                 {error && (
                     <span
                         className={cn('whitespace-nowrap', {

@@ -13,4 +13,18 @@ export const taskAddOrEditDialogFormValuesSchema = z.object({
     status: z.string(),
 })
 
+export const taskAddOreditDialogFormContentSubtaskDraggableDataSchema = z.object({
+    subtaskIndex: z.number(),
+    sortable: z.object({
+        containerId: z.string(),
+        index: z.number(),
+        // Should have a better schema, but there is no need ATM
+        items: z.array(z.object({})),
+    }),
+})
+
 export type TaskAddOrEditDialogFormValues = z.infer<typeof taskAddOrEditDialogFormValuesSchema>
+
+export type TaskAddOrEditDialogFormContentSubtaskDraggableData = z.infer<
+    typeof taskAddOreditDialogFormContentSubtaskDraggableDataSchema
+>

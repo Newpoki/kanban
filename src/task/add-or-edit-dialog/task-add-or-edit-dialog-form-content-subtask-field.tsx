@@ -1,9 +1,8 @@
 import { ControlledInput, ControlledInputProps } from '@/components/form/controlled-input'
 import { Close } from '@/icons'
-import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { useCallback } from 'react'
-import { useForm } from 'react-hook-form'
+import { useFormContext } from 'react-hook-form'
 import { TaskAddOrEditDialogFormValues } from '../task-schemas'
 import { getFieldKey } from '@/lib/get-field-key'
 
@@ -12,26 +11,24 @@ type TaskAddOrEditDialogFormContentSubtaskFieldProps = Omit<
     'name'
 > & {
     index: number
-    onDelete: (index: number) => void
+    onDelete?: (index: number) => void
 }
 
 export const TaskAddOrEditDialogFormContentSubtaskField = ({
-    className,
     onDelete,
     index,
     ...others
 }: TaskAddOrEditDialogFormContentSubtaskFieldProps) => {
-    const { register } = useForm<TaskAddOrEditDialogFormValues>()
+    const { register } = useFormContext<TaskAddOrEditDialogFormValues>()
 
     const handleDelete = useCallback(() => {
-        onDelete(index)
+        onDelete?.(index)
     }, [index, onDelete])
 
     return (
         <div className="flex w-full items-center gap-2">
             <ControlledInput
                 {...others}
-                className={cn('w-full', className)}
                 name={getFieldKey<TaskAddOrEditDialogFormValues>(`subtasks.${index}.name`)}
             />
             <Button size="icon" variant="transparent" type="button" onClick={handleDelete}>

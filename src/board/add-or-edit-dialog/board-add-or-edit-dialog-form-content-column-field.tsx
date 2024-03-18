@@ -16,7 +16,6 @@ type BoardAddOrEditDialogFormContentColumnFieldProps = Omit<
 }
 
 export const BoardAddOrEditDialogFormContentColumnField = ({
-    className,
     onDelete,
     index,
     ...others
@@ -37,7 +36,6 @@ export const BoardAddOrEditDialogFormContentColumnField = ({
 
             <ControlledInput
                 {...others}
-                className={cn('w-full', className)}
                 name={getFieldKey<BoardAddOrEditDialogFormValues>(`columns.${index}.name`)}
             />
             <Button size="icon" variant="transparent" type="button" onClick={handleDelete}>
