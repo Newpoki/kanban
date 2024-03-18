@@ -28,12 +28,12 @@ export const BoardsHeader = ({ isDrawerExpanded }: BoardsHeaderProps) => {
                 className={cn(
                     'drawer-width board-border-color flex h-full flex-shrink-0 items-center pl-6 transition-width md:border-r-[1px]',
                     {
-                        'md:w-[190px]': !isDrawerExpanded,
+                        'md:w-[190px] lg:w-[210px]': !isDrawerExpanded,
                     }
                 )}
             >
                 <Logo className="mr-4 h-5 w-6 md:hidden" />
-                <LogoFull className="hidden h-6 w-[125px] fill-black dark:fill-white md:block" />
+                <LogoFull className="hidden fill-black dark:fill-white md:block md:h-6 md:w-[125px]" />
             </section>
 
             <BoardsHeaderPopover board={board} headerRef={ref} />
