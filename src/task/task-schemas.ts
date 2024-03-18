@@ -13,7 +13,20 @@ export const taskAddOrEditDialogFormValuesSchema = z.object({
     status: z.string(),
 })
 
-export const taskAddOreditDialogFormContentSubtaskDraggableDataSchema = z.object({
+export const taskAddOrEeditDialogFormContentSubtaskDraggableDataSchema = z.object({
+    subtaskIndex: z.number(),
+    sortable: z.object({
+        containerId: z.string(),
+        index: z.number(),
+        // Should have a better schema, but there is no need ATM
+        items: z.array(z.object({})),
+    }),
+})
+
+export const taskDialogSubtaskDraggableDataSchema = z.object({
+    subtaskId: z.string(),
+    subtaskName: z.string(),
+    subtaskStatus: z.enum(['pending', 'done']),
     subtaskIndex: z.number(),
     sortable: z.object({
         containerId: z.string(),
@@ -26,5 +39,7 @@ export const taskAddOreditDialogFormContentSubtaskDraggableDataSchema = z.object
 export type TaskAddOrEditDialogFormValues = z.infer<typeof taskAddOrEditDialogFormValuesSchema>
 
 export type TaskAddOrEditDialogFormContentSubtaskDraggableData = z.infer<
-    typeof taskAddOreditDialogFormContentSubtaskDraggableDataSchema
+    typeof taskAddOrEeditDialogFormContentSubtaskDraggableDataSchema
 >
+
+export type TaskDialogSubtaskDraggableData = z.infer<typeof taskDialogSubtaskDraggableDataSchema>

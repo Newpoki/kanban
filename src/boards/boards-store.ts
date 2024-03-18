@@ -11,7 +11,7 @@ import {
 import { persist } from 'zustand/middleware'
 import omit from 'lodash.omit'
 import { insertAtIndex } from '@/lib/insert-at-index'
-import { arrayMove } from '@dnd-kit/sortable'
+import { arrayMove, arraySwap } from '@dnd-kit/sortable'
 
 const DEFAULT_BOARD: Board = {
     id: uuidv4(),
@@ -160,11 +160,20 @@ type DeleteBoardPayload = {
     boardId: Board['id']
 }
 
+type ChangeSubtaskIndexPayload = {
+    boardId: Board['id']
+    columnId: BoardColumn['id']
+    taskId: BoardColumnTask['id']
+    oldIndex: number
+    newIndex: number
+}
+
 export type BoardsStore = {
     data: BoardsMap
     changeSubtaskStatus: (payload: ChangeSubtaskStatusPayload) => void
     changeTaskIndex: (payload: ChangeTaskIndexPayload) => void
     changeTaskColumn: (payload: ChangeTaskColumnPayload) => void
+    changeSubtaskIndex: (payload: ChangeSubtaskIndexPayload) => void
     deleteTask: (payload: DeleteTaskPayload) => void
     addTask: (payload: AddTaskPayload) => void
     editTask: (payload: EditTaskPayload) => void
@@ -177,6 +186,40 @@ export const useBoardsStore = create(
     persist<BoardsStore>(
         (set, get) => ({
             data: getInitialBoardsMap(),
+            changeSubtaskIndex: ({ boardId, columnId, taskId, newIndex, oldIndex }) => {
+                const board = get().data[boardId]
+
+                if (board == null) {
+                    return
+                }
+
+                const updatedBoard: Board = {
+                    ...board,
+                    columns: board.columns.map((column) => {
+                        if (column.id !== columnId) {
+                            return column
+                        }
+
+                        return {
+                            ...column,
+                            tasks: column.tasks.map((task) => {
+                                if (task.id !== taskId) {
+                                    return task
+                                }
+
+                                return {
+                                    ...task,
+                                    subtasks: arraySwap(task.subtasks, oldIndex, newIndex),
+                                }
+                            }),
+                        }
+                    }),
+                }
+
+                set((state) => ({
+                    data: { ...state.data, [boardId]: updatedBoard },
+                }))
+            },
             deleteBoard: ({ boardId }) => {
                 set((state) => ({ data: omit(state.data, [boardId]) }))
             },

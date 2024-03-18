@@ -13,6 +13,7 @@ import { toast } from 'sonner'
 type TaskDialogSubtaskProps = {
     boardId: Board['id']
     columnId: BoardColumn['id']
+    grabHandle?: React.ReactNode
     taskId: BoardColumnTask['id']
     subtask: BoardColumnTaskSubtask
 }
@@ -20,6 +21,7 @@ type TaskDialogSubtaskProps = {
 export const TaskDialogSubtask = ({
     boardId,
     columnId,
+    grabHandle,
     taskId,
     subtask,
 }: TaskDialogSubtaskProps) => {
@@ -34,11 +36,18 @@ export const TaskDialogSubtask = ({
     }, [boardId, changeSubtaskStatus, columnId, subtask.id, taskId])
 
     return (
-        <label className="flex cursor-pointer items-center gap-4 rounded-[4px] bg-grey-100 p-3 text-m transition-colors hover:bg-purple-500/25 dark:bg-grey-900 dark:text-white hover:dark:bg-purple-500/25">
+        <label
+            className="flex w-full cursor-pointer items-center gap-2 rounded-[4px] bg-grey-100 py-2 pl-2  pr-3 text-m transition-colors hover:bg-purple-500/25 dark:bg-grey-900 dark:text-white hover:dark:bg-purple-500/25"
+            // Must provide htmlFor as there might be a button element that will get focused by the label before the checkbox
+            htmlFor={subtask.id}
+        >
+            {grabHandle}
             <Checkbox
+                id={subtask.id}
                 key={subtask.id}
                 checked={subtask.status === 'done'}
                 onCheckedChange={handleChangeSubtaskStatus}
+                className="mr-4"
             />
             <span
                 className={cn({

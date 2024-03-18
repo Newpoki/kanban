@@ -10,9 +10,9 @@ import { useBoardsStore } from '@/boards/boards-store'
 import { selectBoardTask } from '@/boards/boards-selectors'
 import { Board, BoardColumn, BoardColumnTask } from '@/boards/boards-schemas'
 import { cn } from '@/lib/utils'
-import { TaskDialogSubtask } from './task-dialog-subtask'
 import { TaskDialogColumnSelect } from './task-dialog-column-select'
 import { TaskDialogNotFound } from './task-dialog-not-found'
+import { TaskDialogSubtasks } from './task-dialog-subtasks'
 
 type TaskDialogProps = {
     boardId: Board['id']
@@ -63,19 +63,12 @@ export const TaskDialog = ({ boardId, columnId, taskId, isOpen, onClose }: TaskD
                                 : `Subtasks (${doneCount} of ${task.subtasks.length})`}
                         </h3>
 
-                        <ul className="flex flex-col gap-2">
-                            {task.subtasks.map((subtask) => {
-                                return (
-                                    <TaskDialogSubtask
-                                        key={subtask.id}
-                                        boardId={boardId}
-                                        columnId={columnId}
-                                        taskId={taskId}
-                                        subtask={subtask}
-                                    />
-                                )
-                            })}
-                        </ul>
+                        <TaskDialogSubtasks
+                            boardId={boardId}
+                            columnId={columnId}
+                            subtasks={task.subtasks}
+                            taskId={taskId}
+                        />
                     </section>
 
                     {column != null && (
