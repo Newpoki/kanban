@@ -23,13 +23,13 @@ export const Board = ({ board }: BoardProps) => {
             // create infinite renders
             collisionDetection={pointerWithin}
         >
-            <div className="flex w-full flex-1 flex-col overflow-hidden">
+            <div className="board-border-color flex w-full flex-1 flex-col overflow-hidden border-t-[1px]">
                 {board.columns.length === 0 ? (
                     <BoardEmpty boardId={board.id} />
                 ) : (
                     // Flex 1 1 0 instead of flex 1 to fix issue with scrolling cf https://stackoverflow.com/questions/70198644/overflow-scroll-on-div-with-flex-1-without-specific-height
                     <main
-                        className="board-border-color grid flex-[1_1_0] gap-6 overflow-auto border-t-[1px] p-6"
+                        className=" grid flex-[1_1_0] gap-6 overflow-auto p-6"
                         style={{
                             gridTemplateColumns: `repeat(${board.columns.length + 1}, 280px)`,
                         }}
