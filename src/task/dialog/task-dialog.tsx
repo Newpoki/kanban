@@ -35,6 +35,9 @@ export const TaskDialog = ({ boardId, columnId, taskId, isOpen, onClose }: TaskD
 
     const doneCount = task.subtasks.filter((subtask) => subtask.status === 'done').length
 
+    const hasNoDescription = task.description.length === 0
+    const hasNoSubtasks = task.subtasks.length === 0
+
     return (
         <Dialog open={isOpen} onOpenChange={onClose}>
             <DialogContent className="pb-8">
@@ -45,17 +48,19 @@ export const TaskDialog = ({ boardId, columnId, taskId, isOpen, onClose }: TaskD
                 </DialogHeader>
 
                 <DialogContentInner>
-                    <p
-                        className={cn('text-l text-grey-500', {
-                            italic: task.description.length === 0,
-                        })}
-                    >
-                        {task.description.length === 0 ? 'No description yet' : task.description}
+                    <p className={cn('text-l text-grey-500', { italic: hasNoDescription })}>
+                        {hasNoDescription ? 'No description yet' : task.description}
                     </p>
 
                     <section>
-                        <h3 className="mb-4 text-m text-grey-500 dark:text-white">
-                            Subtasks ({doneCount} of {task.subtasks.length})
+                        <h3
+                            className={cn('mb-4 text-m text-grey-500 dark:text-white', {
+                                italic: hasNoSubtasks,
+                            })}
+                        >
+                            {hasNoSubtasks
+                                ? 'No subtasks yet'
+                                : `Subtasks (${doneCount} of ${task.subtasks.length})`}
                         </h3>
 
                         <ul className="flex flex-col gap-2">
