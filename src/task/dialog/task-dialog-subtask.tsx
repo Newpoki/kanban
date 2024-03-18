@@ -8,6 +8,7 @@ import { Checkbox } from '@/components/ui/checkbox'
 import { cn } from '@/lib/utils'
 import { useBoardsStore } from '@/boards/boards-store'
 import { useCallback } from 'react'
+import { toast } from 'sonner'
 
 type TaskDialogSubtaskProps = {
     boardId: Board['id']
@@ -28,6 +29,8 @@ export const TaskDialogSubtask = ({
 
     const handleChangeSubtaskStatus = useCallback(() => {
         changeSubtaskStatus({ boardId, columnId, taskId, id: subtask.id })
+
+        toast.info("Task subtask's has been updated")
     }, [boardId, changeSubtaskStatus, columnId, subtask.id, taskId])
 
     return (
